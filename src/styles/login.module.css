@@ -1,0 +1,39 @@
+.loginform {
+  padding-left: 30px;
+  padding-top: 20px;
+  color: #e9e5e58a;
+}
+.loginContainer {
+  width: 50%;
+  height: 70%;
+  background: #1515158c;
+  transform: translate(50%, 22%);
+  border-radius: 10px;
+  border: 1px solid #282828;
+}
+.loginform .heading {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2rem;
+}
+.loginform input {
+  width: 50%;
+  margin: auto;
+}
+.loginform label {
+  position: absolute;
+}
+.loginform .create {
+  display: flex;
+  margin-top: 80px;
+  padding: 20px 70px 0 0;
+  justify-content: space-between;
+}
+
+.loginform .file {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  position: absolute;
+  left: 0%;
+}
