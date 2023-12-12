@@ -133,7 +133,7 @@ export const addBook = async (
 
 export const updateBooks = async (
   id,
-  { name, desciption, price, author, category, language },
+  { name, desciption, price, author, category, language ,qty},
   available,
   bookImage
 ) => {
@@ -141,6 +141,7 @@ export const updateBooks = async (
     name,
     desciption,
     price,
+    qty,
     author,
     category,
     language,

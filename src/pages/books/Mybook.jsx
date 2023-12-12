@@ -6,6 +6,7 @@ import Addbook from "./Addbook";
 // import { useBook } from "../../hook/bookHook";
 import { getUserBook } from "../../api/api";
 import styles from "./book.module.css";
+// import { HOST_ROOT } from "../../utils";
 export default function Mybook() {
   const [addBook, setAddbook] = useState(false);
   const { user } = useAuth();
@@ -91,6 +92,7 @@ export default function Mybook() {
                 <img
                   className="card-img-top"
                   src={`http://localhost:9000/books/${book.bookImage}`}
+                  // src={`${HOST_ROOT}/books/${book.bookImage}`}
                   alt="Cardcap"
                 />
                 <div className="card-body">

@@ -11,6 +11,7 @@ import {
 import { useBook } from "../../hook/bookHook";
 import { toast } from "react-toastify";
 import styles from "./book.module.css";
+// import { HOST_ROOT } from "../../utils";
 
 export default function BookDetail() {
   const [updateBook, setUpdate] = useState(false);
@@ -39,6 +40,7 @@ export default function BookDetail() {
     try {
       const fetch = async () => {
         const res = await getSingleCart(id);
+        
         if (res.succuss) {
           setCartP(true);
         } else {
@@ -70,6 +72,7 @@ export default function BookDetail() {
     try {
       if (cartPresent) {
         const res = await removeCart(id);
+        console.log(res);
         if (res.succuss) {
           toast.success("Book deleted from cart");
           setCartP(false);
@@ -143,6 +146,8 @@ export default function BookDetail() {
                         style={{ height: "75%" }}
                         className="card-img-top"
                         src={`http://localhost:9000/books/${book.bookImage}`}
+                        // src={`${HOST_ROOT}/books/${book.bookImage}`}
+                       
                         alt="Cardcap"
                       />
                       <div className="card-body">

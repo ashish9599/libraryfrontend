@@ -4,15 +4,16 @@ import { Link } from "react-router-dom";
 import { getAllbook } from "../../api/api";
 import styles from "./book.module.css";
 import { useBook } from "../../hook/bookHook";
+// import { HOST_ROOT } from "../../utils";
 export default function Allbook() {
   const { allbook } = useBook();
-
+  console.log("p",process.env.REACT_APP_HOST);
+  console.log(process.env.REACT_APP_CLIENT_ID);
   const [book, setbook] = useState(null);
 
   useEffect(() => {
     try {
       const fetch = async () => {
-        document.title = "ApkaBOOKStore";
         const res = await getAllbook();
         if (res.succuss) {
           setbook(res.book);
@@ -32,12 +33,12 @@ export default function Allbook() {
     <>
       {
         <>
+        <h1>{process.env.HOST}</h1>
           <div style={{ width: "100vw" }}>
             <div
               className={styles.boks}
               style={{
                 display: "flex",
-
                 flexWrap: "wrap",
                 background: "aliceblue",
                 columnGap: "62px",
@@ -59,6 +60,7 @@ export default function Allbook() {
                     <img
                       className="card-img-top"
                       src={`http://localhost:9000/books/${book.bookImage}`}
+                      // src={`${HOST_ROOT}/books/${book.bookImage}`}
                       alt="Cardcap"
                     />
 

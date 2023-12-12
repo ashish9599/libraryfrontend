@@ -1,5 +1,8 @@
-export const API_ROOT = "https://apka-book-store.onrender.com/api/v1";
-// export const API_ROOT = "http://localhost:9000/api/v1";
+
+export const HOST_ROOT = "https://apka-book-store.onrender.com";
+// export const API_ROOT = `${HOST_ROOT}/api/v1`;/
+// export const API_ROOT = `${process.env.HOST}/api/v1`;
+export const API_ROOT = "http://localhost:9000/api/v1";
 
 export const API_URLS = {
   signUp: () => `${API_ROOT}/auth/signIN`,

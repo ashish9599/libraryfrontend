@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { cancelOrder, getSinglebook } from "../../api/api";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+// import { HOST_ROOT } from "../../utils";
 
 export default function OrderDetail({
   bookId,
@@ -51,6 +52,7 @@ export default function OrderDetail({
             <img
               className="card-img-top"
               src={`http://localhost:9000/books/${book.bookImage}`}
+              // src={`${HOST_ROOT}/books/${book.bookImage}`}
               alt="Cardcap"
             />
             <div className="card-body">

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../../hook/authHook";
 import styles from "../../styles/login.module.css";
+// import { HOST_ROOT } from "../../utils";
 const UserP = () => {
   const { user } = useAuth();
 
@@ -40,6 +41,7 @@ const UserP = () => {
                 <img
                   style={{ width: "30vh", height: "30vh", borderRadius: "50%" }}
                   src={`http://localhost:9000/users/${user.userImage}`}
+                  // src={`${HOST_ROOT}/books/${user.userImage}`}
                   alt="Carcap"
                 />
               )}

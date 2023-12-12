@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { cancelOrder, getSingleOrder, getSinglebook } from "../../api/api";
 import { toast } from "react-toastify";
 import styles from "./order.module.css";
+// import { HOST_ROOT } from "../../utils";
 const OrderDetail = () => {
   const [order, setOrder] = useState(null);
   const [bookId, setBookId] = useState(null);
@@ -96,6 +97,7 @@ const OrderDetail = () => {
                         style={{ height: "75%" }}
                         className="card-img-top"
                         src={`http://localhost:9000/books/${book.bookImage}`}
+                        // src={`${HOST_ROOT}/books/${book.bookImage}`}
                         alt="Cardcap"
                       />
                       <div className="card-body"></div>

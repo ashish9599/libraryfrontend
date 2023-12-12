@@ -11,6 +11,7 @@ const Navbar = () => {
   const { allbook, searchbookByname } = useBook();
   const titleRef = useRef(null);
   useEffect(() => {
+    document.title = "ApkaBOOKStore";
     titleRef.current.focus();
   }, []);
   const handleSubmit = async (e) => {

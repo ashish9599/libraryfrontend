@@ -22,6 +22,7 @@ const UpdateBook = ({ bookId, books, setUpdate, update }) => {
     author: books.author,
     category: books.category,
     language: books.language,
+    qty:books.qty
   });
   const [bookImage, setBookImage] = useState(null);
 
@@ -40,12 +41,12 @@ const UpdateBook = ({ bookId, books, setUpdate, update }) => {
     try {
       let { name, desciption, price, author, category, language } = book;
 
-      if (!name && !desciption && !price && !author && !category && !language) {
+      if (name==="" && desciption==="" && price==="" && author==="" && category==="" && language==="") {
         return toast.info("Please fill the form");
       }
 
       const res = await updateBooks(bookId, book, available, bookImage);
-
+console.log(res);
       if (res.succuss) {
         setUpdate(!update);
         toast.success("Book added successfully");
@@ -117,6 +118,18 @@ const UpdateBook = ({ bookId, books, setUpdate, update }) => {
               className="form-control"
               id="inputAddress"
               placeholder="price"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="price">Quantity</label>
+            <input
+              value={book.qty}
+              onChange={onchange}
+              type="number"
+              name="qty"
+              className="form-control"
+              id="inputAddress"
+              placeholder="Quantity"
             />
           </div>
         </div>

@@ -3,6 +3,7 @@ import { getSinglebook, removeCart } from "../../api/api";
 import { Link } from "react-router-dom";
 
 import { toast } from "react-toastify";
+// import { HOST_ROOT } from "../../utils";
 
 export default function CartBook({ bookId, setRender, render }) {
   const [book, setbook] = useState(null);
@@ -53,6 +54,7 @@ export default function CartBook({ bookId, setRender, render }) {
             <img
               className="card-img-top"
               src={`http://localhost:9000/books/${book.bookImage}`}
+              // src={`${HOST_ROOT}/books/${book.bookImage}`}
               alt="Cardcap"
             />
             <div className="card-body">
