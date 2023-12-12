@@ -28,7 +28,7 @@ export default function BookOrder() {
     price: "",
   });
 
-  
+
   const { bookId } = useParams();
   // console.log(order)
   const navigate = useNavigate();
@@ -39,7 +39,7 @@ export default function BookOrder() {
         if (res.succuss) {
           setbook(res.book);
           order.price = res.book.price;
-          order.qty=res.book.qty;
+          order.qty = res.book.qty;
         }
       };
       fetch();
@@ -52,7 +52,7 @@ export default function BookOrder() {
     try {
       const fetch = async () => {
         const res = await getSinglebookInventory(bookId);
-      //  console.log(res);
+        //  console.log(res);
         if (res.succuss) {
           setInventory(res.Inventory);
         }
@@ -61,8 +61,7 @@ export default function BookOrder() {
     } catch (error) {
       console.error(error);
     }
-  }, [bookId,render]);
-
+  }, [bookId, render]);
 
   const handleOrder = async () => {
     const { name, address, price } = order;
@@ -72,27 +71,24 @@ export default function BookOrder() {
       if (name === "" && address === "") {
         return toast.error("Please fill the all feilds");
       }
-      if(newQTY>inventory.bookLeft){
-        
+      if (newQTY > inventory.bookLeft) {
         return toast.info(`Only ${inventory.bookLeft} left`);
       }
       const res = await placedOrder(bookId, pr, newQTY);
       if (res.succuss) {
+        const newRes = await bookSold(bookId, newQTY);
+        if (newRes.succuss) {
+          setRender(!render);
+          const cartR = await getSingleCart(bookId);
 
-        const newRes=await bookSold(bookId,newQTY);
-      if(newRes.succuss){
-        setRender(!render);
-        const cartR = await getSingleCart(bookId);
-
-        if (cartR.succuss) {
-          await removeCart(bookId);
+          if (cartR.succuss) {
+            await removeCart(bookId);
+          }
+          toast.success("Order Placed");
+          navigate(`/myOrder`);
+        } else {
+          toast.error(newRes.message);
         }
-        toast.success("Order Placed");
-        navigate(`/myOrder`);
-      }else{
-
-        toast.error(newRes.message);
-      }
       } else {
       }
     } catch (error) {
@@ -119,7 +115,7 @@ export default function BookOrder() {
             padding: "30px",
             borderRadius: "20px",
           }}
-          >
+        >
           <div style={{ marginBottom: "20px" }}>
             <Link to={`/`}>
               <span
@@ -140,84 +136,93 @@ export default function BookOrder() {
             </Link>
           </div>
 
-
-          {inventory&&inventory.bookLeft > 0 ? (
+          {inventory && inventory.bookLeft > 0 ? (
             <>
-            {inventory&&inventory.bookLeft < 10&& <p style={{color:"red"}}>Hurry!!! 
-             <br /> Quantity {inventory&&inventory.bookLeft} left</p>}
-        
-            
-          <div className="form-group col-md-6" style={{ paddingLeft: "0px" }}>
-            <label htmlFor="inputEmail4">Name</label>
-            <input
-              type="text"
-              className="form-control"                                
-              id="inputEmail4"
-              placeholder="Name"
-              name="name"
-              onChange={handleChange}
-            />
-          </div>
+              {inventory && inventory.bookLeft < 10 && (
+                <p style={{ color: "red" }}>
+                  Hurry!!!
+                  <br /> Quantity {inventory && inventory.bookLeft} left
+                </p>
+              )}
 
-          <div className="form-group">
-            <label htmlFor="inputAddress">Address</label>
-            <input
-              type="text"
-              className="form-control"
-              id="inputAddress"
-              placeholder="1234 Main St"
-              name="address"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="inputAddress2">Address 2</label>
-            <input
-              type="text"
-              className="form-control"
-              id="inputAddress2"
-              placeholder="Apartment, studio, or floor"
-              name="address2"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-row">
-            <div className="form-group col-md-4">
-              <label htmlFor="inputCity">City</label>
-              <input
-                type="text"
-                className="form-control"
-                id="inputCity"
-                name="city"
-                onChange={handleChange}
-              />
-            </div>
+              <div
+                className="form-group col-md-6"
+                style={{ paddingLeft: "0px" }}
+              >
+                <label htmlFor="inputEmail4">Name</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="inputEmail4"
+                  placeholder="Name"
+                  name="name"
+                  onChange={handleChange}
+             
+                />
+              </div>
 
-            <div className="form-group col-md-2">
-              <label htmlFor="inputZip">Zip</label>
-              <input
-                type="text"
-                className="form-control"
-                name="zip"
-                id="inputZip"
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-            <div className="form-group col-md-3" style={{ paddingLeft: "0px" }}>
-              <label htmlFor="inputZip">Quantity</label>
-              <input
-                type="number"
-                className="form-control"
-                id="inputZip"
-                placeholder="Quantity"
-                max={inventory&&inventory.bookLeft}
-                min={1}
-                name="qty"
-                value={newQTY}
-                onChange={(e)=>setQty(e.target.value)}
-              />
-            </div>
+              <div className="form-group">
+                <label htmlFor="inputAddress">Address</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="inputAddress"
+                  placeholder="1234 Main St"
+                  name="address"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="inputAddress2">Address 2</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="inputAddress2"
+                  placeholder="Apartment, studio, or floor"
+                  name="address2"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="form-row">
+                <div className="form-group col-md-4">
+                  <label htmlFor="inputCity">City</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="inputCity"
+                    name="city"
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div className="form-group col-md-2">
+                  <label htmlFor="inputZip">Zip</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="zip"
+                    id="inputZip"
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+              <div
+                className="form-group col-md-3"
+                style={{ paddingLeft: "0px" }}
+              >
+                <label htmlFor="inputZip">Quantity</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  id="inputZip"
+                  placeholder="Quantity"
+                  max={inventory && inventory.bookLeft}
+                  min={1}
+                  name="qty"
+                  value={newQTY}
+                  onChange={(e) => setQty(e.target.value)}
+                />
+              </div>
             </>
           ) : (
             ""
@@ -227,23 +232,24 @@ export default function BookOrder() {
             <p>{book && book.name}</p>
           </div>
           <div className="form-floating mb-3" style={{ color: "red" }}>
-            {inventory&&inventory.bookLeft > 0 ? (
-
-
+            {inventory && inventory.bookLeft > 0 ? (
               <p> Total Price:Rs.{order.price * newQTY}</p>
-         
             ) : (
               "Out Of Stock"
             )}
           </div>
           <div>
             <button
-              disabled={inventory&&inventory.bookLeft ? 0 : 1}
+              disabled={inventory && inventory.bookLeft ? 0 : 1}
               type="button"
-              className={`btn btn-${inventory&&inventory.bookLeft > 0 ? "secondary" : "danger"}`}
+              className={`btn btn-${
+                inventory && inventory.bookLeft > 0 ? "secondary" : "danger"
+              }`}
               onClick={handleOrder}
             >
-              {inventory&&inventory.bookLeft > 0 ? "Placed Order" : "Not Available"}
+              {inventory && inventory.bookLeft > 0
+                ? "Placed Order"
+                : "Not Available"}
             </button>
           </div>
         </form>

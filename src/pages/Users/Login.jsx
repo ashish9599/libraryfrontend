@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuth } from "../../hook/authHook";
@@ -10,7 +10,10 @@ const Login = () => {
   });
   const navigate = useNavigate();
   const { user, loginUser } = useAuth();
-
+  const titleRef = useRef(null);
+  useEffect(() => {
+    titleRef.current.focus();
+  }, []);
   if (user) {
     return <Navigate to="/" />;
   }
@@ -62,6 +65,7 @@ const Login = () => {
                 name="email"
                 value={credential.email}
                 onChange={onchange}
+                ref={titleRef}
               />
             </div>
             <div className="form-group">

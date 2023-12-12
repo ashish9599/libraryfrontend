@@ -10,7 +10,7 @@ import {
 } from "../../api/api";
 import { useBook } from "../../hook/bookHook";
 import { toast } from "react-toastify";
-
+import styles from "./book.module.css";
 
 export default function BookDetail() {
   const [updateBook, setUpdate] = useState(false);
@@ -20,7 +20,6 @@ export default function BookDetail() {
   const { user } = useAuth();
   const { REMOVEBook } = useBook();
   const [cartPresent, setCartP] = useState(false);
-
 
   const { id } = useParams();
   useEffect(() => {
@@ -126,6 +125,7 @@ export default function BookDetail() {
         <>
           <div style={{ width: "100vw" }}>
             <div
+              className={styles.bokside}
               style={{
                 display: "flex",
                 gap: "2%",
@@ -133,7 +133,6 @@ export default function BookDetail() {
                 width: "80%",
                 transform: "translate(12.5%, 70px)",
                 background: "aliceblue",
-                height: "430px",
               }}
             >
               {book && (
@@ -164,7 +163,7 @@ export default function BookDetail() {
                                 type="button"
                                 className={`btn btn-${
                                   updateBook ? "danger" : "success"
-                                } `}
+                                }  ${styles.mg}`}
                                 onClick={(e) => {
                                   setUpdate(!updateBook);
                                 }}
@@ -178,6 +177,7 @@ export default function BookDetail() {
                     </div>
                   </div>
                   <div
+                    className={styles.lb}
                     style={{
                       width: "65%",
                       display: "flex",
@@ -205,8 +205,8 @@ export default function BookDetail() {
                       </div>
                     </div>
                     <div
+                      className={styles.fb}
                       style={{
-                        display: "flex",
                         justifyContent: "space-between",
                         padding: "20px",
                       }}

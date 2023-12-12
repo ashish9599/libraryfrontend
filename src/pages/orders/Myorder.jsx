@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { getUserOrder } from "../../api/api";
 import { Link } from "react-router-dom";
-
+import styles from "./order.module.css";
 import OrderDetail from "./Order";
 
 export default function Myorder() {
@@ -31,7 +31,7 @@ export default function Myorder() {
           padding: "56px 0px",
         }}
       >
-        <div style={{ paddingLeft: "130px" }}>
+        <div className={styles.mrl}>
           <Link to={`/myCart`}>
             <span>
               <img

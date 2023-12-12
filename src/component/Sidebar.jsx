@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useBook } from "../hook/bookHook";
-
+import style from "./home.module.css";
 export default function Sidebar() {
   const { seachByCategory, searchBylanguage } = useBook();
   const categoryList = [
@@ -40,8 +40,8 @@ export default function Sidebar() {
   return (
     <>
       <div
+        className={style.side}
         style={{
-          width: "12vw",
           height: "100vh",
           position: "fixed",
           top: "21%",

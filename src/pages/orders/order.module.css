@@ -1,0 +1,32 @@
+.oc {
+  display: flex;
+  font-size: 2rem;
+}
+.mrl {
+  padding-left: 130px;
+}
+@media only screen and (max-width: 900px) {
+  
+  .oc {
+    display: block;
+  }
+
+  .mrl {
+    padding-left: 65px;
+  }
+}
+@media only screen and (max-width: 650px) {
+  .od {
+    font-size: 0.8rem;
+  }
+  .od span {
+    font-size: 1.3rem;
+  }
+  .oc {
+    font-size: 1.4rem;
+  }
+
+  .mrl {
+    padding-left: 35px;
+  }
+}

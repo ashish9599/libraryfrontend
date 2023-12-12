@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { cancelOrder, getSingleOrder, getSinglebook } from "../../api/api";
 import { toast } from "react-toastify";
-
+import styles from "./order.module.css";
 const OrderDetail = () => {
   const [order, setOrder] = useState(null);
   const [bookId, setBookId] = useState(null);
@@ -102,6 +102,7 @@ const OrderDetail = () => {
                     </div>
                   </div>
                   <div
+                    className={styles.od}
                     style={{
                       width: "65%",
                       display: "flex",
@@ -129,19 +130,15 @@ const OrderDetail = () => {
                       </div>
                     </div>
                     <div
+                      className={styles.oc}
                       style={{
-                        display: "flex",
                         justifyContent: "space-between",
                         padding: "20px",
                       }}
                     >
                       <div>
-                        <div style={{ fontSize: "2rem" }}>
-                          Total Quantity:{order.qty}
-                        </div>
-                        <div style={{ fontSize: "2rem" }}>
-                          Total Cost:Rs.{order.price}
-                        </div>
+                        <div>Total Quantity:{order.qty}</div>
+                        <div>Total Cost:Rs.{order.price}</div>
                       </div>
                       <span>
                         <button

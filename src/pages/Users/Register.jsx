@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signUp } from "../../api/api";
 import { toast } from "react-toastify";
@@ -14,7 +14,10 @@ const Register = () => {
     password: "",
   });
   const [userImage, setUserImage] = useState(null);
-
+  const titleRef = useRef(null);
+  useEffect(() => {
+    titleRef.current.focus();
+  }, []);
   const onchange = (e) => {
     setCredential({ ...credential, [e.target.name]: e.target.value });
   };
@@ -54,7 +57,7 @@ const Register = () => {
           className={styles.loginform}
         >
           <div className={styles.heading}>
-            <p>Login to Ash BOOKStore</p>
+            <p>SignUp to Ash BOOKStore</p>
           </div>
           <div className="form-group">
             <label htmlFor="name">Name</label>
@@ -66,6 +69,7 @@ const Register = () => {
               placeholder="Enter name"
               name="name"
               value={credential.name}
+              ref={titleRef}
               onChange={onchange}
             />
           </div>
@@ -110,7 +114,7 @@ const Register = () => {
               style={{ display: "none" }}
             />
           </div>
-          <div className={styles.create} style={{ marginTop: "62px" }}>
+          <div className={`${styles.create} ${styles.mL} `}>
             <p>
               <Link to={"/login"}>Already hava an account?</Link>
             </p>

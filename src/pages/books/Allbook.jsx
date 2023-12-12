@@ -2,16 +2,18 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { getAllbook } from "../../api/api";
-
+import styles from "./book.module.css";
+import { useBook } from "../../hook/bookHook";
 export default function Allbook() {
-  
+  const { allbook } = useBook();
+
   const [book, setbook] = useState(null);
 
   useEffect(() => {
     try {
       const fetch = async () => {
+        document.title = "ApkaBOOKStore";
         const res = await getAllbook();
-
         if (res.succuss) {
           setbook(res.book);
         }
@@ -22,20 +24,21 @@ export default function Allbook() {
     }
   }, []);
 
- 
+  useEffect(() => {
+    setbook(allbook);
+  }, [allbook]);
 
   return (
     <>
       {
         <>
           <div style={{ width: "100vw" }}>
-           
             <div
+              className={styles.boks}
               style={{
                 display: "flex",
-                width: "72%",
+
                 flexWrap: "wrap",
-                transform: "translate(24%, 50px)",
                 background: "aliceblue",
                 columnGap: "62px",
                 rowGap: "40px",

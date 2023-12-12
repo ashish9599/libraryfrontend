@@ -1,0 +1,68 @@
+.gap {
+  gap: 40px;
+}
+.search {
+  width: 50%;
+}
+.p {
+  width: 15%;
+}
+.sl {
+  width: 45%;
+}
+.sl li {
+  font-size: 1.3rem;
+}
+@media only screen and (max-width: 900px) {
+  .p {
+    width: 20%;
+  }
+  .side {
+    padding: 0px;
+    font-size: 14px;
+  }
+  .side h4 {
+    font-size: 15px;
+  }
+}
+@media only screen and (max-width: 650px) {
+  #fS a {
+    font-size: 0.6rem;
+  }
+  .gap {
+    gap: 10px;
+  }
+  .sl {
+    width: 30%;
+    font-size: 0.8rem;
+  }
+  .sl li {
+    font-size: 0.8rem;
+  }
+  .search {
+    width: 45%;
+  }
+  .side {
+    width: 12vh;
+  }
+  
+  .p ul li {
+    margin: 2px !important;
+  }
+  .p {
+    width: 38%;
+  }
+  .side {
+    width: auto;
+    padding: 0px;
+    font-size: 10px;
+  }
+  .side h4 {
+    font-size: 15px;
+  }
+  .all4 button {
+    width: 72px;
+    height: 30px;
+    padding: 0;
+  }
+}

@@ -1,15 +1,18 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../hook/authHook";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useBook } from "../hook/bookHook";
-
+import style from "./home.module.css";
 const Navbar = () => {
   const { user, logout } = useAuth();
   const [name, setName] = useState("");
   const [display, setDisplay] = useState(false);
   const { allbook, searchbookByname } = useBook();
-
+  const titleRef = useRef(null);
+  useEffect(() => {
+    titleRef.current.focus();
+  }, []);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -44,39 +47,40 @@ const Navbar = () => {
         style={{ height: "10vh" }}
       >
         <div
-          className="collapse navbar-collapse justify-content-between"
-          id="navbarTogglerDemo01"
-          // style={{ height: "10vh" }}
+          className={`navbar-collapse ${style.gap}`}
+          style={{ display: "flex", justifyContent: "space-between" }}
         >
-          <div>
-            <Link to={"/"} className="navbar-brand">
+          <div id={style.fS} style={{ width: "18%" }}>
+            <Link to={"/"} className="navbar-brand ">
               Ash BookStore
             </Link>
           </div>
-          <div>
-            <ul className="navbar-nav mr-auto mt-2 mt-lg-0"></ul>
+          <div className={style.search}>
             <form onSubmit={handleSubmit} className="form-inline my-2 my-lg-0">
-              <div>
+              <div style={{ display: "flex", gap: "10px", width: "100%" }}>
                 <input
-                  className="form-control mr-sm-2"
+                  className="form-control mr-sm-2 p-sm-2"
+                  style={{ width: "100%" }}
                   type="search"
                   placeholder="Search"
                   aria-label="Search"
                   value={name}
+                  ref={titleRef}
                   onChange={(e) => setName(e.target.value)}
                 />
                 <button
-                  className="btn btn-outline-success my-2 my-sm-0"
+                  className="btn btn-outline-success  my-sm-0"
                   type="submit"
                 >
-                  Search 
+                  Search
                 </button>
               </div>
 
               <div
+                className={style.sl}
                 style={{
                   position: "absolute",
-                  width: "21.5%",
+
                   background: "#ecf5fd",
                   overflow: "hidden",
                   maxHeight: "350px",
@@ -98,7 +102,6 @@ const Navbar = () => {
                           <li
                             style={{
                               border: "1px solid rgb(25 25 25 / 12%)",
-                              fontSize: "24px",
                             }}
                           >
                             {book.name}
@@ -110,12 +113,16 @@ const Navbar = () => {
               </div>
             </form>
           </div>
-          <div>
+          <div className={style.p}>
             {user ? (
               <div>
                 <ul
                   className="navbar-nav  mt-2 mt-lg-0"
-                  style={{ alignItems: "center" }}
+                  style={{
+                    alignItems: "center",
+                    flexDirection: "row",
+                    justifyContent: "space-around",
+                  }}
                 >
                   <li className="nav-item active m-2">
                     <Link to={"/UserP"}>
@@ -141,7 +148,14 @@ const Navbar = () => {
                 </ul>
               </div>
             ) : (
-              <ul className="navbar-nav  mt-2 mt-lg-0">
+              <ul
+                className="navbar-nav   mt-2 mt-lg-0"
+                style={{
+                  alignItems: "center",
+                  flexDirection: "row",
+                  justifyContent: "space-around",
+                }}
+              >
                 <li className="nav-item active m-2">
                   <Link to={"/login"}>Login</Link>
                 </li>
@@ -155,11 +169,13 @@ const Navbar = () => {
       </nav>
       <div>
         <div
+          className={style.all4}
           style={{
             display: "flex",
             justifyContent: "end",
             padding: "20px 20px 0px 0px",
-            gap: "30px",
+            gap: "10px",
+            marginBottom: "10px",
           }}
         >
           {user && display && (
@@ -207,7 +223,7 @@ const Navbar = () => {
                   border: "2px solid black",
                   background: "black",
                   borderRadius: "4px",
-                  cursor:"pointer"
+                  cursor: "pointer",
                 }}
                 onClick={() => setDisplay(!display)}
               >
@@ -216,7 +232,7 @@ const Navbar = () => {
                     border: "1px solid white",
                     display: "block",
                     height: "0px",
-                    margin: "5px 3px 5px  3px",                                         
+                    margin: "5px 3px 5px  3px",
                   }}
                 ></div>
                 <div

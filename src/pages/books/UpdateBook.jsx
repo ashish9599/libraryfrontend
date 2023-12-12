@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { updateBooks } from "../../api/api";
 
@@ -26,7 +26,10 @@ const UpdateBook = ({ bookId, books, setUpdate, update }) => {
   const [bookImage, setBookImage] = useState(null);
 
   const [available, setAvailable] = useState(books.available);
-
+  const titleRef = useRef(null);
+  useEffect(() => {
+    titleRef.current.focus();
+  }, []);
   const onchange = (e) => {
     setbook({ ...book, [e.target.name]: e.target.value });
   };
@@ -89,6 +92,7 @@ const UpdateBook = ({ bookId, books, setUpdate, update }) => {
               // id="name"
               placeholder="name"
               value={book.name}
+              ref={titleRef}
             />
           </div>
           <div className="form-group col-md-6">

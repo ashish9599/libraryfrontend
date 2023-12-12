@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import CartBook from "./CartBook";
 import { deleteAll, getUserCart } from "../../api/api";
 import { toast } from "react-toastify";
-
+import styles from "../books/book.module.css";
 export default function MyCart() {
   const [cart, setCart] = useState(null);
 
@@ -48,10 +48,10 @@ export default function MyCart() {
         }}
       >
         <div
+          className={styles.mrl}
           style={{
             display: "flex",
             justifyContent: "space-between",
-            padding: "0px 30px 0px 130px",
           }}
         >
           <div>

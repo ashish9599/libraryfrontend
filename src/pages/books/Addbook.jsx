@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { useBook } from "../../hook/bookHook";
 
@@ -29,7 +29,10 @@ const Addbook = ({ addbookform, setAddbook }) => {
 
   const [bookImage, setBookImage] = useState(null);
   const { addBookfrom } = useBook();
-
+  const titleRef = useRef(null);
+  useEffect(() => {
+    titleRef.current.focus();
+  }, []);
   const onchange = (e) => {
     setbook({ ...book, [e.target.name]: e.target.value });
   };
@@ -51,7 +54,7 @@ const Addbook = ({ addbookform, setAddbook }) => {
 
       const res = await addBookfrom(book, available, bookImage);
       if (res.succuss) {
-        const invent = await addInventory(res.book._id,  book.qty);
+        const invent = await addInventory(res.book._id, book.qty);
         console.log(invent);
         setAddbook(!addbookform);
         toast.success("Book added successfully");
@@ -106,6 +109,7 @@ const Addbook = ({ addbookform, setAddbook }) => {
                 name="name"
                 id="name"
                 placeholder="name"
+                ref={titleRef}
               />
             </div>
             <div className="form-group col-md-6">
@@ -226,8 +230,21 @@ const Addbook = ({ addbookform, setAddbook }) => {
             </div>
           </div>
 
-          <button type="submit" className="btn btn-primary">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            style={{ marginRight: "15px" }}
+          >
             AddBook
+          </button>
+          <button
+            type="submit"
+            className="btn btn-danger"
+            onClick={() => {
+              setAddbook(!addBookfrom);
+            }}
+          >
+            Cancil
           </button>
         </form>
       </div>

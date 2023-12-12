@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { changePassword } from "../../api/api";
@@ -10,7 +10,10 @@ const Forget = () => {
     confirmPassword: "",
   });
   const navigate = useNavigate();
-
+  const titleRef = useRef(null);
+  useEffect(() => {
+    titleRef.current.focus();
+  }, []);
   const onchange = (e) => {
     setCredential({ ...credential, [e.target.name]: e.target.value });
   };
@@ -23,6 +26,7 @@ const Forget = () => {
     }
     try {
       const res = await changePassword(credential);
+      console.log(res);
       if (res.succuss) {
         navigate(`/login`);
         setCredential({
@@ -43,7 +47,12 @@ const Forget = () => {
     <>
       <div
         className="Login"
-        style={{ height: "90vh", width: "100vw", background: "black" }}
+        style={{
+          height: "90vh",
+          minHeight: "90vh",
+          width: "100vw",
+          background: "black",
+        }}
       >
         <div className={styles.loginContainer}>
           <form onSubmit={handleSubmit} className={styles.loginform}>
@@ -81,6 +90,7 @@ const Forget = () => {
                 name="email"
                 value={credential.email}
                 onChange={onchange}
+                ref={titleRef}
               />
             </div>
             <div className="form-group">

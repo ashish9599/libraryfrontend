@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuth } from "../../hook/authHook";
@@ -14,7 +14,10 @@ const UpdateProfile = () => {
   const [userImage, setUserImage] = useState(null);
   const navigate = useNavigate();
   const { UpdateUser } = useAuth();
-
+  const titleRef = useRef(null);
+  useEffect(() => {
+    titleRef.current.focus();
+  }, []);
   const onchange = (e) => {
     setCredential({ ...credential, [e.target.name]: e.target.value });
   };
@@ -43,7 +46,12 @@ const UpdateProfile = () => {
     <>
       <div
         className="Login"
-        style={{ height: "90vh", width: "100vw", background: "black" }}
+        style={{
+          height: "90vh",
+          minHeight: "90vh",
+          width: "100vw",
+          background: "black",
+        }}
       >
         <div className={styles.loginContainer}>
           <form
@@ -78,6 +86,7 @@ const UpdateProfile = () => {
             <div className="form-group">
               <label htmlFor="name">Name</label>
               <input
+                ref={titleRef}
                 type="text"
                 className="form-control"
                 id="name"
@@ -118,7 +127,7 @@ const UpdateProfile = () => {
               />
             </div>
 
-            <div style={{ marginTop: "75px" }}>
+            <div className={styles.mU}>
               <button
                 style={{ position: "absolute", right: "24%" }}
                 type="submit"

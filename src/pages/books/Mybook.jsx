@@ -5,7 +5,7 @@ import { useAuth } from "../../hook/authHook";
 import Addbook from "./Addbook";
 // import { useBook } from "../../hook/bookHook";
 import { getUserBook } from "../../api/api";
-
+import styles from "./book.module.css";
 export default function Mybook() {
   const [addBook, setAddbook] = useState(false);
   const { user } = useAuth();
@@ -30,17 +30,14 @@ export default function Mybook() {
       <div
         style={{
           width: "100wh",
-
-      
-
           padding: "56px 0px",
         }}
       >
         <div
+          className={styles.mrl}
           style={{
             display: "flex",
             justifyContent: "space-between",
-            padding: "0px 30px 0px 130px",
           }}
         >
           <Link to={`/`}>

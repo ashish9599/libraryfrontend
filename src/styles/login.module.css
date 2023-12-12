@@ -37,3 +37,52 @@
   position: absolute;
   left: 0%;
 }
+.mU {
+  margin-top: 75px;
+}
+.mL {
+  margin-top: 5px;
+}
+
+@media only screen and (max-width: 900px) {
+  .loginform .file {
+    display: block;
+  }
+  .loginContainer {
+    height: 80%;
+  }
+  .loginform .heading {
+    font-size: 1.2rem;
+  }
+
+  .loginform label {
+    position: relative;
+  }
+  .mU {
+    margin-top: 30px;
+  }
+  .mU button {
+    height: 32px;
+    width: 70px;
+    font-size: 0.9rem;
+    padding: 0;
+  }
+  .loginform .create {
+    margin-top: 80px;
+    padding: 5px 10px 0 0;
+  }
+  .loginform .create button {
+    height: 32px;
+    width: 70px;
+    font-size: 0.9rem;
+    padding: 0;
+  }
+  .loginform .file p {
+    margin-bottom: 0rem;
+  }
+}
+@media only screen and (max-width: 650px) {
+  .mL {
+    margin-top: 5px;
+  }
+}
