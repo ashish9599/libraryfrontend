@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { useAuth } from "../../hook/authHook";
 import Addimage from "../../images/icons8-add-image-48.png";
 import styles from "../../styles/login.module.css";
+import Loader from "../Loader";
 const UpdateProfile = () => {
   const { user } = useAuth();
   const [credential, setCredential] = useState({
@@ -11,6 +12,7 @@ const UpdateProfile = () => {
     email: user.email,
   });
 
+  const [loader, setloader] = useState(false);
   const [userImage, setUserImage] = useState(null);
   const navigate = useNavigate();
   const { UpdateUser } = useAuth();
@@ -29,8 +31,10 @@ const UpdateProfile = () => {
       return toast.info("Please fill the form");
     }
     try {
+      setloader(true)
       const res = await UpdateUser(credential, userImage);
       if (res.succuss) {
+        setloader(false);
         navigate(`/UserP`);
         toast.success(res.message);
         setCredential({ name: "", email: "" });
@@ -44,6 +48,16 @@ const UpdateProfile = () => {
 
   return (
     <>
+    <div
+    style={{
+      position: "absolute",
+      width: "100%",
+      zIndex: "10",
+      opacity: "0.55",
+    }}
+  >
+    {loader && <Loader/>}
+  </div>
       <div
         className="Login"
         style={{

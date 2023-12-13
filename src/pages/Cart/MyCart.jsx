@@ -5,17 +5,20 @@ import CartBook from "./CartBook";
 import { deleteAll, getUserCart } from "../../api/api";
 import { toast } from "react-toastify";
 import styles from "../books/book.module.css";
+import Loader from "../Loader";
 export default function MyCart() {
   const [cart, setCart] = useState(null);
-
+  const [loader, setloader] = useState(false);
   const [render, setRender] = useState(false);
   // const inCart = true;
   useEffect(() => {
     try {
       const fetch = async () => {
+        setloader(true)
         const res = await getUserCart();
         if (res.succuss) {
           setCart(res.cart);
+          setloader(false)
         }
       };
       fetch();
@@ -40,6 +43,15 @@ export default function MyCart() {
 
   return (
     <>
+     <div style={{
+      position: "absolute",
+    width: "72%",
+   zIndex:"10",
+   opacity:"0.55",
+    transform: "translate(24%, 50px)"}}>
+
+    {loader&&<Loader/> }
+    </div>
       <div
         style={{
           width: "100vw",
@@ -98,6 +110,8 @@ export default function MyCart() {
                 render={render}
                 setRender={setRender}
                 key={i}
+                loader={loader}
+                setloader={setloader}
               />
             ))}
         </div>

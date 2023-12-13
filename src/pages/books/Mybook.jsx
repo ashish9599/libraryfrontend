@@ -6,27 +6,39 @@ import Addbook from "./Addbook";
 // import { useBook } from "../../hook/bookHook";
 import { getUserBook } from "../../api/api";
 import styles from "./book.module.css";
-// import { HOST_ROOT } from "../../utils";
+import { HOST_ROOT } from "../../utils";
+import Loader from "../Loader";
 export default function Mybook() {
   const [addBook, setAddbook] = useState(false);
   const { user } = useAuth();
   const [allbook, setAllbook] = useState();
-
+  const [loader, setloader] = useState(false);
   useEffect(() => {
     try {
       const fetch = async () => {
+        setloader(true)
         const res = await getUserBook();
         if (res.succuss) {
           setAllbook(res.book);
+          setloader(false)
         }
       };
       fetch();
     } catch (error) {
       console.error(error);
     }
-  });
+  },[]);
   return (
     <>
+     <div style={{
+      position: "absolute",
+    width: "72%",
+   zIndex:"10",
+   opacity:"0.55",
+    transform: "translate(24%, 50px)"}}>
+
+    {loader&&<Loader/> }
+    </div>
       {addBook && <Addbook addbookform={addBook} setAddbook={setAddbook} />}
       <div
         style={{
@@ -91,8 +103,8 @@ export default function Mybook() {
               <div className="card" style={{ width: "17.6rem" }} key={i}>
                 <img
                   className="card-img-top"
-                  src={`http://localhost:9000/books/${book.bookImage}`}
-                  // src={`${HOST_ROOT}/books/${book.bookImage}`}
+                  // src={`http://localhost:9000/books/${book.bookImage}`}
+                  src={`${HOST_ROOT}/books/${book.bookImage}`}
                   alt="Cardcap"
                 />
                 <div className="card-body">

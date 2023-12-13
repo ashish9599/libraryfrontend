@@ -3,11 +3,13 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuth } from "../../hook/authHook";
 import styles from "../../styles/login.module.css";
+import Loader from "../Loader";
 const Login = () => {
   const [credential, setCredential] = useState({
     email: "",
     password: "",
   });
+  const [loader, setloader] = useState(false);
   const navigate = useNavigate();
   const { user, loginUser } = useAuth();
   const titleRef = useRef(null);
@@ -30,8 +32,11 @@ const Login = () => {
       return toast.info("Please fill the form");
     }
     try {
+      setloader(true)
       const res = await loginUser(credential);
+      console.log("l",res)
       if (res.succuss) {
+        setloader(true)
         navigate(`/`);
         toast.success(res.message);
       } else {
@@ -45,6 +50,16 @@ const Login = () => {
 
   return (
     <>
+    <div
+        style={{
+          position: "absolute",
+          width: "100%",
+          zIndex: "10",
+          opacity: "0.55",
+        }}
+      >
+        {loader && <Loader/>}
+      </div>
       <div
         className="Login"
         style={{ height: "90vh", width: "100vw", background: "black" }}

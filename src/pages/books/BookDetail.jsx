@@ -11,10 +11,12 @@ import {
 import { useBook } from "../../hook/bookHook";
 import { toast } from "react-toastify";
 import styles from "./book.module.css";
-// import { HOST_ROOT } from "../../utils";
+import { HOST_ROOT } from "../../utils";
+import Loader from "../Loader";
 
 export default function BookDetail() {
   const [updateBook, setUpdate] = useState(false);
+  const [loader, setloader] = useState(false);
 
   const [book, setbook] = useState(null);
   const navigate = useNavigate();
@@ -26,9 +28,11 @@ export default function BookDetail() {
   useEffect(() => {
     try {
       const fetch = async () => {
+        setloader(true);
         const res = await getSinglebook(id);
         if (res.succuss) {
           setbook(res.book);
+          setloader(false);
         }
       };
       fetch();
@@ -40,7 +44,7 @@ export default function BookDetail() {
     try {
       const fetch = async () => {
         const res = await getSingleCart(id);
-        
+
         if (res.succuss) {
           setCartP(true);
         } else {
@@ -55,10 +59,11 @@ export default function BookDetail() {
 
   const Removebook = async () => {
     try {
+      setloader(true);
       const res = await REMOVEBook(id);
-
       if (res.succuss) {
         navigate("/");
+        setloader(false);
         toast.success("Book removed successfully");
       } else {
         toast.error(res.message);
@@ -71,19 +76,24 @@ export default function BookDetail() {
   const handleCart = async (id) => {
     try {
       if (cartPresent) {
+        setloader(true);
         const res = await removeCart(id);
-        console.log(res);
+        console.log("r=>",res);
         if (res.succuss) {
           toast.success("Book deleted from cart");
           setCartP(false);
+          setloader(false);
         } else {
           toast.error(res.message);
         }
       } else {
+        setloader(true);
         const res = await addBookToCart(id);
+        console.log("a=>",res);
         if (res.succuss) {
           toast.success("Book added to Cart");
           setCartP(true);
+          setloader(false);
         } else {
           toast.error(res.message);
         }
@@ -95,6 +105,16 @@ export default function BookDetail() {
 
   return (
     <>
+      <div
+        style={{
+          position: "absolute",
+          width: "100%",
+          zIndex: "10",
+          opacity: "0.55",
+        }}
+      >
+        {loader && <Loader />}
+      </div>
       {updateBook && (
         <UpdateBook
           bookId={id}
@@ -145,9 +165,8 @@ export default function BookDetail() {
                       <img
                         style={{ height: "75%" }}
                         className="card-img-top"
-                        src={`http://localhost:9000/books/${book.bookImage}`}
-                        // src={`${HOST_ROOT}/books/${book.bookImage}`}
-                       
+                        // src={`http://localhost:9000/books/${book.bookImage}`}
+                        src={`${HOST_ROOT}/books/${book.bookImage}`}
                         alt="Cardcap"
                       />
                       <div className="card-body">

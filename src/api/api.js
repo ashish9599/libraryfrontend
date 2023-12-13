@@ -127,7 +127,7 @@ export const addBook = async (
       authToken: `${token}`,
     },
   });
-
+console.log("inapi",res);
   return res.data;
 };
 

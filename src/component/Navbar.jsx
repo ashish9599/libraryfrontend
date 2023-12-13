@@ -8,7 +8,7 @@ const Navbar = () => {
   const { user, logout } = useAuth();
   const [name, setName] = useState("");
   const [display, setDisplay] = useState(false);
-  const { allbook, searchbookByname } = useBook();
+  const { allbook, searchbookByname,searchhome } = useBook();
   const titleRef = useRef(null);
   useEffect(() => {
     document.title = "ApkaBOOKStore";
@@ -53,7 +53,7 @@ const Navbar = () => {
         >
           <div id={style.fS} style={{ width: "18%" }}>
             <Link to={"/"} className="navbar-brand ">
-              Ash BookStore
+              ApkaBOOKStore
             </Link>
           </div>
           <div className={style.search}>
@@ -185,7 +185,8 @@ const Navbar = () => {
                 <button
                   type="button"
                   className="btn btn-success"
-                  // style={{ marginRight: "20px" }}
+                
+                  onClick={()=>searchhome()}
                 >
                   Home
                 </button>

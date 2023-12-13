@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 
 import Addimage from "../../images/icons8-add-image-48.png";
 import styles from "../../styles/login.module.css";
+import Loader from "../Loader";
 const Register = () => {
   const navigate = useNavigate();
 
@@ -13,6 +14,8 @@ const Register = () => {
     email: "",
     password: "",
   });
+  
+  const [loader, setloader] = useState(false);
   const [userImage, setUserImage] = useState(null);
   const titleRef = useRef(null);
   useEffect(() => {
@@ -31,9 +34,11 @@ const Register = () => {
     }
 
     try {
+      setloader(true)
       const res = await signUp(credential, userImage);
-
+      
       if (res.succuss) {
+        setloader(false);
         navigate(`/`);
         toast.success(res.message);
         setCredential({ name: "", email: "", password: "" });
@@ -46,6 +51,17 @@ const Register = () => {
   };
 
   return (
+   <>
+    <div
+    style={{
+      position: "absolute",
+      width: "100%",
+      zIndex: "10",
+      opacity: "0.55",
+    }}
+  >
+    {loader && <Loader/>}
+  </div>
     <div
       className="Login"
       style={{ height: "90vh", width: "100vw", background: "black" }}
@@ -125,6 +141,7 @@ const Register = () => {
         </form>
       </div>
     </div>
+   </>
   );
 };
 

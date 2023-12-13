@@ -3,9 +3,9 @@ import { getSinglebook, removeCart } from "../../api/api";
 import { Link } from "react-router-dom";
 
 import { toast } from "react-toastify";
-// import { HOST_ROOT } from "../../utils";
+import { HOST_ROOT } from "../../utils";
 
-export default function CartBook({ bookId, setRender, render }) {
+export default function CartBook({ bookId, setRender, render,loader,setloader }) {
   const [book, setbook] = useState(null);
   const [placing, setPlacing] = useState(false);
 
@@ -25,11 +25,13 @@ export default function CartBook({ bookId, setRender, render }) {
 
   const handleRemove = async () => {
     try {
+      setloader(true)
       const res = await removeCart(bookId);
-
+      console.log("re>",res);
       if (res.succuss) {
         toast.success("Cart deleted succefully");
         setRender(!render);
+        setloader(false)
       } else {
         toast.error(res.message);
       }
@@ -40,21 +42,14 @@ export default function CartBook({ bookId, setRender, render }) {
 
   return (
     <>
-      {/* {placing && (
-        <PlacedOrder
-          bookId={bookId}
-          placing={placing}
-          setPlacing={setPlacing}
-          cartId={cartId}
-        />
-      )} */}
+     
       {book && (
         <>
           <div className="card" style={{ width: "17.6rem" }}>
             <img
               className="card-img-top"
-              src={`http://localhost:9000/books/${book.bookImage}`}
-              // src={`${HOST_ROOT}/books/${book.bookImage}`}
+              // src={`http://localhost:9000/books/${book.bookImage}`}
+              src={`${HOST_ROOT}/books/${book.bookImage}`}
               alt="Cardcap"
             />
             <div className="card-body">

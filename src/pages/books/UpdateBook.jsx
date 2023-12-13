@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { updateBooks } from "../../api/api";
 
 import Addimage from "../../images/icons8-add-image-48.png";
+import Loader from "../Loader";
 const UpdateBook = ({ bookId, books, setUpdate, update }) => {
   const category = [
     "English",
@@ -25,7 +26,7 @@ const UpdateBook = ({ bookId, books, setUpdate, update }) => {
     qty:books.qty
   });
   const [bookImage, setBookImage] = useState(null);
-
+  const [loader, setloader] = useState(false);
   const [available, setAvailable] = useState(books.available);
   const titleRef = useRef(null);
   useEffect(() => {
@@ -44,12 +45,13 @@ const UpdateBook = ({ bookId, books, setUpdate, update }) => {
       if (name==="" && desciption==="" && price==="" && author==="" && category==="" && language==="") {
         return toast.info("Please fill the form");
       }
-
+      setloader(true);
       const res = await updateBooks(bookId, book, available, bookImage);
-console.log(res);
+      console.log(res);
       if (res.succuss) {
         setUpdate(!update);
         toast.success("Book added successfully");
+        setloader(false);
       } else {
         toast.error(res.message);
       }
@@ -59,8 +61,18 @@ console.log(res);
   };
 
   return (
-    // <div className="UpdateBook">
-    // <div className="UpdateBook" style={{ width: "87vw" }}>
+
+   <>
+    <div
+    style={{
+      position: "absolute",
+      width: "100%",
+      zIndex: "10",
+      opacity: "0.55",
+     }}
+  >
+    {loader && <Loader />}
+  </div>
     <div>
       {/* <div className="UpdateBook" style={{ width: "100vw" }}> */}
       {/* <div style={{ textAlign: "center" }}>
@@ -235,6 +247,7 @@ console.log(res);
         </button>
       </form>
     </div>
+   </>
   );
 };
 

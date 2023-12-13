@@ -3,12 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { changePassword } from "../../api/api";
 import styles from "../../styles/login.module.css";
+import Loader from "../Loader";
 const Forget = () => {
   const [credential, setCredential] = useState({
     email: "",
     newPassword: "",
     confirmPassword: "",
   });
+  const [loader, setloader] = useState(false);
   const navigate = useNavigate();
   const titleRef = useRef(null);
   useEffect(() => {
@@ -19,15 +21,16 @@ const Forget = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const { email, password } = credential;
-    if (email === "" && password === "") {
-      return toast.info("Please fill the form");
-    }
-    try {
-      const res = await changePassword(credential);
-      console.log(res);
-      if (res.succuss) {
+  setloader(true)
+  const { email, password } = credential;
+  if (email === "" && password === "") {
+    return toast.info("Please fill the form");
+  }
+  try {
+    const res = await changePassword(credential);
+    console.log(res);
+    if (res.succuss) {
+        setloader(true)
         navigate(`/login`);
         setCredential({
           email: "",
@@ -45,6 +48,16 @@ const Forget = () => {
 
   return (
     <>
+    <div
+        style={{
+          position: "absolute",
+          width: "100%",
+          zIndex: "10",
+          opacity: "0.55",
+        }}
+      >
+        {loader && <Loader/>}
+      </div>
       <div
         className="Login"
         style={{

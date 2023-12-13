@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../../hook/authHook";
 import styles from "../../styles/login.module.css";
-// import { HOST_ROOT } from "../../utils";
+import { HOST_ROOT } from "../../utils";
 const UserP = () => {
   const { user } = useAuth();
 
@@ -17,7 +17,7 @@ const UserP = () => {
             style={{ textAlign: "center", background: "black", color: "white" }}
           >
             <div>
-              <Link to={`/login`}>
+              <Link to={`/`}>
                 <span
                   style={{
                     background: "#ffffff8c",
@@ -40,8 +40,8 @@ const UserP = () => {
               {user && (
                 <img
                   style={{ width: "30vh", height: "30vh", borderRadius: "50%" }}
-                  src={`http://localhost:9000/users/${user.userImage}`}
-                  // src={`${HOST_ROOT}/books/${user.userImage}`}
+                  // src={`http://localhost:9000/users/${user.userImage}`}
+                  src={`${HOST_ROOT}/books/${user.userImage}`}
                   alt="Carcap"
                 />
               )}

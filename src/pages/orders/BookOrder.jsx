@@ -9,6 +9,7 @@ import {
 } from "../../api/api";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import Loader from "../Loader";
 // import { useAuth } from "../../hook/authHook";
 
 export default function BookOrder() {
@@ -17,7 +18,7 @@ export default function BookOrder() {
   const [render, setRender] = useState(false);
   const [newQTY, setQty] = useState(0);
   // const { user } = useAuth();
-
+  const [loader, setloader] = useState(false);
   const [order, setOrder] = useState({
     name: "",
     address: "",
@@ -50,6 +51,7 @@ export default function BookOrder() {
 
   useEffect(() => {
     try {
+
       const fetch = async () => {
         const res = await getSinglebookInventory(bookId);
         //  console.log(res);
@@ -66,8 +68,8 @@ export default function BookOrder() {
   const handleOrder = async () => {
     const { name, address, price } = order;
     const pr = price * newQTY;
-
     try {
+      setloader(true)
       if (name === "" && address === "") {
         return toast.error("Please fill the all feilds");
       }
@@ -75,17 +77,19 @@ export default function BookOrder() {
         return toast.info(`Only ${inventory.bookLeft} left`);
       }
       const res = await placedOrder(bookId, pr, newQTY);
+      console.log("ord",res);
       if (res.succuss) {
         const newRes = await bookSold(bookId, newQTY);
         if (newRes.succuss) {
           setRender(!render);
           const cartR = await getSingleCart(bookId);
-
+          
           if (cartR.succuss) {
             await removeCart(bookId);
           }
           toast.success("Order Placed");
           navigate(`/myOrder`);
+          setloader(true)
         } else {
           toast.error(newRes.message);
         }
@@ -101,6 +105,15 @@ export default function BookOrder() {
 
   return (
     <>
+     <div style={{
+      position: "absolute",
+    width: "72%",
+   zIndex:"10",
+   opacity:"0.55",
+    transform: "translate(24%, 50px)"}}>
+
+    {loader&&<Loader/> }
+    </div>
       <>
         <form
           action=""

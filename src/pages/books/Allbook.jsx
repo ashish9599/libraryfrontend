@@ -4,19 +4,23 @@ import { Link } from "react-router-dom";
 import { getAllbook } from "../../api/api";
 import styles from "./book.module.css";
 import { useBook } from "../../hook/bookHook";
-// import { HOST_ROOT } from "../../utils";
+import { HOST_ROOT } from "../../utils";
+import Loader from "../Loader";
+
 export default function Allbook() {
   const { allbook } = useBook();
-  console.log("p",process.env.REACT_APP_HOST);
-  console.log(process.env.REACT_APP_CLIENT_ID);
+
   const [book, setbook] = useState(null);
+  const [loader, setloader] = useState(false);
 
   useEffect(() => {
     try {
       const fetch = async () => {
+        setloader(true);
         const res = await getAllbook();
         if (res.succuss) {
           setbook(res.book);
+          setloader(false);
         }
       };
       fetch();
@@ -31,9 +35,19 @@ export default function Allbook() {
 
   return (
     <>
+      <div
+        style={{
+          position: "absolute",
+          width: "72%",
+          zIndex: "10",
+          opacity: "0.55",
+          transform: "translate(24%, 50px)",
+        }}
+      >
+        {loader && <Loader />}
+      </div>
       {
         <>
-        <h1>{process.env.HOST}</h1>
           <div style={{ width: "100vw" }}>
             <div
               className={styles.boks}
@@ -59,8 +73,8 @@ export default function Allbook() {
                   <div className="card" style={{ width: "17.6rem" }} key={i}>
                     <img
                       className="card-img-top"
-                      src={`http://localhost:9000/books/${book.bookImage}`}
-                      // src={`${HOST_ROOT}/books/${book.bookImage}`}
+                      // src={`http://localhost:9000/books/${book.bookImage}`}
+                      src={`${HOST_ROOT}/books/${book.bookImage}`}
                       alt="Cardcap"
                     />
 

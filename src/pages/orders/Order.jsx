@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { cancelOrder, getSinglebook } from "../../api/api";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-// import { HOST_ROOT } from "../../utils";
+import { HOST_ROOT } from "../../utils";
+import Loader from "../Loader";
 
 export default function OrderDetail({
   bookId,
@@ -13,7 +14,7 @@ export default function OrderDetail({
   orderId,
 }) {
   const [book, setbook] = useState(null);
-
+  const [loader, setloader] = useState(false);
   useEffect(() => {
     try {
       const fetch = async () => {
@@ -31,11 +32,13 @@ export default function OrderDetail({
 
   const handleOrder = async () => {
     try {
+      setloader(true);
       const res = await cancelOrder(orderId);
-
+      
       if (res.succuss) {
         toast.success("Order Cancelled");
         setRender(!render);
+        setloader(false);
       } else {
         toast.error(res.message);
       }
@@ -46,13 +49,23 @@ export default function OrderDetail({
 
   return (
     <>
+    <div
+        style={{
+          position: "absolute",
+          width: "100%",
+          zIndex: "10",
+          opacity: "0.55",
+        }}
+      >
+        {loader && <Loader/>}
+      </div>
       {book && (
         <>
           <div className="card" style={{ width: "17.6rem" }}>
             <img
               className="card-img-top"
-              src={`http://localhost:9000/books/${book.bookImage}`}
-              // src={`${HOST_ROOT}/books/${book.bookImage}`}
+              // src={`http://localhost:9000/books/${book.bookImage}`}
+              src={`${HOST_ROOT}/books/${book.bookImage}`}
               alt="Cardcap"
             />
             <div className="card-body">
@@ -62,7 +75,8 @@ export default function OrderDetail({
                 <p>Price:{price}</p>
               </div>
               <div style={{ marginBottom: "20px" }}>
-                <Link to={`/orderDetail/${orderId}`}>
+                <Link
+                 to={`/orderDetail/${orderId}`}>
                   <button type="button" className="btn btn-dark">
                     Order Detail
                   </button>

@@ -3,11 +3,13 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { cancelOrder, getSingleOrder, getSinglebook } from "../../api/api";
 import { toast } from "react-toastify";
 import styles from "./order.module.css";
-// import { HOST_ROOT } from "../../utils";
+import { HOST_ROOT } from "../../utils";
+import Loader from "../Loader";
 const OrderDetail = () => {
   const [order, setOrder] = useState(null);
   const [bookId, setBookId] = useState(null);
   const [book, setbook] = useState(null);
+  const [loader, setloader] = useState(false);
   const { orderId } = useParams();
   const navigate = useNavigate();
   useEffect(() => {
@@ -27,10 +29,12 @@ const OrderDetail = () => {
   }, [orderId]);
   useEffect(() => {
     try {
+      setloader(true);
       const fetch = async () => {
         const res = await getSinglebook(bookId);
         if (res.succuss) {
           setbook(res.book);
+          setloader(false);
         }
       };
       fetch();
@@ -40,11 +44,13 @@ const OrderDetail = () => {
   }, [bookId]);
   const handleOrder = async () => {
     try {
+      setloader(true);
       const res = await cancelOrder(orderId);
-
+      
       if (res.succuss) {
         navigate(`/myOrder`);
         toast.success("Order Cancelled");
+        setloader(false);
       } else {
         toast.error(res.message);
       }
@@ -55,6 +61,16 @@ const OrderDetail = () => {
 
   return (
     <>
+     <div
+        style={{
+          position: "absolute",
+          width: "100%",
+          zIndex: "10",
+          opacity: "0.55",
+        }}
+      >
+        {loader && <Loader/>}
+      </div>
       <div
         style={{
           width: "81%",
@@ -96,8 +112,8 @@ const OrderDetail = () => {
                       <img
                         style={{ height: "75%" }}
                         className="card-img-top"
-                        src={`http://localhost:9000/books/${book.bookImage}`}
-                        // src={`${HOST_ROOT}/books/${book.bookImage}`}
+                        // src={`http://localhost:9000/books/${book.bookImage}`}
+                        src={`${HOST_ROOT}/books/${book.bookImage}`}
                         alt="Cardcap"
                       />
                       <div className="card-body"></div>

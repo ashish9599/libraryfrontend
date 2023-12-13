@@ -4,16 +4,20 @@ import { getUserOrder } from "../../api/api";
 import { Link } from "react-router-dom";
 import styles from "./order.module.css";
 import OrderDetail from "./Order";
+import Loader from "../Loader";
 
 export default function Myorder() {
   const [order, setOrder] = useState(null);
   const [render, setRender] = useState(false);
+  const [loader, setloader] = useState(false);
   useEffect(() => {
     try {
       const fetch = async () => {
+        setloader(true)
         const res = await getUserOrder();
         if (res.succuss) {
           setOrder(res.order);
+          setloader(false)
         }
       };
       fetch();
@@ -24,6 +28,15 @@ export default function Myorder() {
 
   return (
     <>
+    <div style={{
+      position: "absolute",
+    width: "72%",
+   zIndex:"10",
+   opacity:"0.55",
+    transform: "translate(24%, 50px)"}}>
+
+    {loader&&<Loader/> }
+    </div>
       <div
         style={{
           width: "100vw",

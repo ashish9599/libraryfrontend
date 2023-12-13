@@ -16,7 +16,7 @@ export const useBook = () => {
 
 export const useBookProvider = () => {
   const [book, setbook] = useState(null);
-  // const [render, setRender] = useState(false);
+  const [render, setRender] = useState(false);
 
   useEffect(() => {
     try {
@@ -30,7 +30,7 @@ export const useBookProvider = () => {
     } catch (error) {
       console.error(error);
     }
-  }, []);
+  }, [render]);
 
   const addBookfrom = async (book, available, bookImage) => {
     try {
@@ -90,7 +90,7 @@ export const useBookProvider = () => {
 
       if (res.succuss) {
         setbook(res.book);
-        // setRender(!render)
+        setRender(!render)
       }
       return res;
     } catch (error) {
