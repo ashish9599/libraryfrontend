@@ -8,7 +8,7 @@ const Navbar = () => {
   const { user, logout } = useAuth();
   const [name, setName] = useState("");
   const [display, setDisplay] = useState(false);
-  const { allbook, searchbookByname,searchhome } = useBook();
+  const { allbook, searchbookByname, searchhome } = useBook();
   const titleRef = useRef(null);
   useEffect(() => {
     document.title = "ApkaBOOKStore";
@@ -45,22 +45,23 @@ const Navbar = () => {
     <>
       <nav
         className="navbar navbar-expand-lg navbar-light bg-light"
-        style={{ height: "10vh" }}
+        style={{ height: "10vh", alignItems: "center" }}
       >
         <div
           className={`navbar-collapse ${style.gap}`}
           style={{ display: "flex", justifyContent: "space-between" }}
         >
-          <div id={style.fS} style={{ width: "18%" }}>
-            <Link to={"/"} className="navbar-brand ">
-              ApkaBOOKStore
+          <div style={{ width: "13.5%" }}>
+            <Link to={"/"} className={`navbar-brand ${style.fs}`}>
+              Apka <br />
+              BOOKStore
             </Link>
           </div>
           <div className={style.search}>
             <form onSubmit={handleSubmit} className="form-inline my-2 my-lg-0">
               <div style={{ display: "flex", gap: "10px", width: "100%" }}>
                 <input
-                  className="form-control mr-sm-2 p-sm-2"
+                  className={`form-control mr-sm-2 p-sm-2 ${style.fs}`}
                   style={{ width: "100%" }}
                   type="search"
                   placeholder="Search"
@@ -70,7 +71,7 @@ const Navbar = () => {
                   onChange={(e) => setName(e.target.value)}
                 />
                 <button
-                  className="btn btn-outline-success  my-sm-0"
+                  className={`btn btn-outline-success  my-sm-0 ${style.fs}`}
                   type="submit"
                 >
                   Search
@@ -78,10 +79,9 @@ const Navbar = () => {
               </div>
 
               <div
-                className={style.sl}
+                className={`${style.sl} ${style.fs}`}
                 style={{
                   position: "absolute",
-
                   background: "#ecf5fd",
                   overflow: "hidden",
                   maxHeight: "350px",
@@ -114,7 +114,7 @@ const Navbar = () => {
               </div>
             </form>
           </div>
-          <div className={style.p}>
+          <div className={`${style.p} ${style.fs} `}>
             {user ? (
               <div>
                 <ul
@@ -169,55 +169,54 @@ const Navbar = () => {
         </div>
       </nav>
       <div>
-        <div
-          className={style.all4}
-          style={{
-            display: "flex",
-            justifyContent: "end",
-            padding: "20px 20px 0px 0px",
-            gap: "10px",
-            marginBottom: "10px",
-          }}
-        >
-          {user && display && (
-            <>
-              <Link to={`/`}>
-                <button
-                  type="button"
-                  className="btn btn-success"
-                
-                  onClick={()=>searchhome()}
-                >
-                  Home
-                </button>
-              </Link>
-              <Link to={`/mybook`}>
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  // style={{ marginRight: "20px" }}
-                >
-                  MyBook
-                </button>
-              </Link>
-              <Link to={`/myCart`}>
-                <button
-                  type="button"
-                  className="btn btn-info"
-                  // style={{ marginRight: "20px" }}
-                >
-                  MyCart
-                </button>
-              </Link>
-              <Link to={`/myOrder`}>
-                <button type="button" className="btn btn-dark">
-                  MyOrder
-                </button>
-              </Link>
-            </>
-          )}
-          {user && (
-            <>
+        {user && (
+          <>
+            <div
+              className={style.all4}
+              style={{
+                display: "flex",
+                justifyContent: "end",
+                padding: "20px 20px 0px 0px",
+                gap: "10px",
+                marginBottom: "10px",
+              }}
+            >
+              {display && (
+                <>
+                  <Link to={`/`}>
+                    <button
+                      type="button"
+                      className="btn btn-success"
+                      onClick={() => searchhome()}
+                    >
+                      Home
+                    </button>
+                  </Link>
+                  <Link to={`/mybook`}>
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      // style={{ marginRight: "20px" }}
+                    >
+                      MyBook
+                    </button>
+                  </Link>
+                  <Link to={`/myCart`}>
+                    <button
+                      type="button"
+                      className="btn btn-info"
+                      // style={{ marginRight: "20px" }}
+                    >
+                      MyCart
+                    </button>
+                  </Link>
+                  <Link to={`/myOrder`}>
+                    <button type="button" className="btn btn-dark">
+                      MyOrder
+                    </button>
+                  </Link>
+                </>
+              )}
               <div
                 style={{
                   width: "30px",
@@ -254,9 +253,9 @@ const Navbar = () => {
                   }}
                 ></div>
               </div>
-            </>
-          )}
-        </div>
+            </div>
+          </>
+        )}
       </div>
     </>
   );

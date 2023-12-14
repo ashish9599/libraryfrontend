@@ -38,10 +38,10 @@ export default function OrderDetail({
       if (res.succuss) {
         toast.success("Order Cancelled");
         setRender(!render);
-        setloader(false);
       } else {
         toast.error(res.message);
       }
+      setloader(false);
     } catch (error) {
       console.error(error);
     }

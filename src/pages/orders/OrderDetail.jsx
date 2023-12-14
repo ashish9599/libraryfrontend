@@ -34,8 +34,8 @@ const OrderDetail = () => {
         const res = await getSinglebook(bookId);
         if (res.succuss) {
           setbook(res.book);
-          setloader(false);
         }
+        setloader(false);
       };
       fetch();
     } catch (error) {
@@ -50,10 +50,10 @@ const OrderDetail = () => {
       if (res.succuss) {
         navigate(`/myOrder`);
         toast.success("Order Cancelled");
-        setloader(false);
       } else {
         toast.error(res.message);
       }
+      setloader(false);
     } catch (error) {
       console.error(error);
     }
@@ -97,7 +97,7 @@ const OrderDetail = () => {
             <div
               style={{
                 display: "flex",
-                gap: "2%",
+                gap: "20px",
                 flexWrap: "wrap",
                 width: "80%",
                 transform: "translate(12.5%, 70px)",
@@ -107,7 +107,7 @@ const OrderDetail = () => {
             >
               {book && (
                 <>
-                  <div style={{ width: "33%" }}>
+                  <div style={{ width: "100%" }}>
                     <div className="card" style={{ height: "100%" }}>
                       <img
                         style={{ height: "75%" }}
@@ -122,7 +122,7 @@ const OrderDetail = () => {
                   <div
                     className={styles.od}
                     style={{
-                      width: "65%",
+                      width: "100%",
                       display: "flex",
                       flexDirection: "column",
                       justifyContent: "space-between",
@@ -151,7 +151,8 @@ const OrderDetail = () => {
                       className={styles.oc}
                       style={{
                         justifyContent: "space-between",
-                        padding: "20px",
+                     
+                       padding:"35px 0 0 10px"
                       }}
                     >
                       <div>

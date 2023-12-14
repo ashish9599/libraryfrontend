@@ -34,13 +34,13 @@ const UpdateProfile = () => {
       setloader(true)
       const res = await UpdateUser(credential, userImage);
       if (res.succuss) {
-        setloader(false);
         navigate(`/UserP`);
         toast.success(res.message);
         setCredential({ name: "", email: "" });
       } else {
         toast.error(res.message);
       }
+      setloader(false);
     } catch (error) {
       console.error(error);
     }

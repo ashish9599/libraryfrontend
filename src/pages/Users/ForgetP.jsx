@@ -27,20 +27,21 @@ const Forget = () => {
     return toast.info("Please fill the form");
   }
   try {
+    setloader(true)
     const res = await changePassword(credential);
     console.log(res);
     if (res.succuss) {
-        setloader(true)
-        navigate(`/login`);
-        setCredential({
-          email: "",
-          newPassword: "",
-          confirmPassword: "",
-        });
-        toast.success(res.message);
-      } else {
-        toast(res.message);
-      }
+      navigate(`/login`);
+      setCredential({
+        email: "",
+        newPassword: "",
+        confirmPassword: "",
+      });
+      toast.success(res.message);
+    } else {
+      toast(res.message);
+    }
+    setloader(false)
     } catch (error) {
       console.error(error);
     }

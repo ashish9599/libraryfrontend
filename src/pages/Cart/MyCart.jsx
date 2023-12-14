@@ -18,8 +18,8 @@ export default function MyCart() {
         const res = await getUserCart();
         if (res.succuss) {
           setCart(res.cart);
-          setloader(false)
         }
+        setloader(false)
       };
       fetch();
     } catch (error) {

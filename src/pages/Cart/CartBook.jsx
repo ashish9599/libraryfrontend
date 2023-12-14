@@ -31,10 +31,10 @@ export default function CartBook({ bookId, setRender, render,loader,setloader })
       if (res.succuss) {
         toast.success("Cart deleted succefully");
         setRender(!render);
-        setloader(false)
       } else {
         toast.error(res.message);
       }
+      setloader(false)
     } catch (error) {
       console.error(error);
     }

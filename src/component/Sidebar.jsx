@@ -40,7 +40,7 @@ export default function Sidebar() {
   return (
     <>
       <div
-        className={style.side}
+        className={`${style.side} ${style.fs}`}
         style={{
           height: "100vh",
           position: "fixed",

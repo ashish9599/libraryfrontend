@@ -37,7 +37,6 @@ const customFetch = async (url, { body, ...customConfig }) => {
 export const signUp = async ({ name, email, password }, userImage) => {
   const formdata = getFormBody({ name, email, password, userImage });
   const res = await axios.post(API_URLS.signUp(), formdata);
-
   return res.data;
 };
 

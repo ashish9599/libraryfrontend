@@ -20,8 +20,8 @@ export default function Allbook() {
         const res = await getAllbook();
         if (res.succuss) {
           setbook(res.book);
-          setloader(false);
         }
+        setloader(false);
       };
       fetch();
     } catch (error) {

@@ -51,10 +51,10 @@ const UpdateBook = ({ bookId, books, setUpdate, update }) => {
       if (res.succuss) {
         setUpdate(!update);
         toast.success("Book added successfully");
-        setloader(false);
       } else {
         toast.error(res.message);
       }
+      setloader(false);
     } catch (error) {
       console.error(error);
     }

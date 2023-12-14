@@ -17,8 +17,8 @@ export default function Myorder() {
         const res = await getUserOrder();
         if (res.succuss) {
           setOrder(res.order);
-          setloader(false)
         }
+        setloader(false)
       };
       fetch();
     } catch (error) {

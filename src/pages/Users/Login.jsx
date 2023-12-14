@@ -36,12 +36,12 @@ const Login = () => {
       const res = await loginUser(credential);
       console.log("l",res)
       if (res.succuss) {
-        setloader(true)
         navigate(`/`);
         toast.success(res.message);
       } else {
         toast.error(res.message);
       }
+      setloader(false)
       setCredential({ email: "", password: "" });
     } catch (error) {
       console.error(error);
@@ -93,6 +93,7 @@ const Login = () => {
                 name="password"
                 value={credential.password}
                 onChange={onchange}
+                // minLength={5}
               />
             </div>
             <p>

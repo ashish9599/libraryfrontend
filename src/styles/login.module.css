@@ -49,10 +49,16 @@
     display: block;
   }
   .loginContainer {
-    height: 80%;
+    width: 62%;
+    transform: translate(29%, 18%);
   }
   .loginform .heading {
     font-size: 1.2rem;
+  }
+  .loginform input {
+    font-size: 0.8rem;
+    height: 32px;
+    width: 75%;
   }
 
   .loginform label {

@@ -38,13 +38,13 @@ const Register = () => {
       const res = await signUp(credential, userImage);
       
       if (res.succuss) {
-        setloader(false);
         navigate(`/`);
         toast.success(res.message);
         setCredential({ name: "", email: "", password: "" });
       } else {
         toast(res.message);
       }
+      setloader(false);
     } catch (error) {
       console.error(error);
     }

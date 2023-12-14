@@ -29,7 +29,6 @@ export default function BookOrder() {
     price: "",
   });
 
-
   const { bookId } = useParams();
   // console.log(order)
   const navigate = useNavigate();
@@ -51,7 +50,6 @@ export default function BookOrder() {
 
   useEffect(() => {
     try {
-
       const fetch = async () => {
         const res = await getSinglebookInventory(bookId);
         //  console.log(res);
@@ -69,30 +67,30 @@ export default function BookOrder() {
     const { name, address, price } = order;
     const pr = price * newQTY;
     try {
-      setloader(true)
       if (name === "" && address === "") {
         return toast.error("Please fill the all feilds");
       }
       if (newQTY > inventory.bookLeft) {
         return toast.info(`Only ${inventory.bookLeft} left`);
       }
+      setloader(true);
       const res = await placedOrder(bookId, pr, newQTY);
-      console.log("ord",res);
+      console.log("ord", res);
       if (res.succuss) {
         const newRes = await bookSold(bookId, newQTY);
         if (newRes.succuss) {
           setRender(!render);
           const cartR = await getSingleCart(bookId);
-          
+
           if (cartR.succuss) {
             await removeCart(bookId);
           }
           toast.success("Order Placed");
           navigate(`/myOrder`);
-          setloader(true)
         } else {
           toast.error(newRes.message);
         }
+        setloader(false);
       } else {
       }
     } catch (error) {
@@ -105,27 +103,30 @@ export default function BookOrder() {
 
   return (
     <>
-     <div style={{
-      position: "absolute",
-    width: "72%",
-   zIndex:"10",
-   opacity:"0.55",
-    transform: "translate(24%, 50px)"}}>
+      <div
+        style={{
+          position: "absolute",
+          width: "72%",
+          zIndex: "10",
+          opacity: "0.55",
 
-    {loader&&<Loader/> }
-    </div>
+          transform: "translate(24%, 50px)",
+        }}
+      >
+        {loader && <Loader />}
+      </div>
       <>
         <form
           action=""
           style={{
             color: "#b8b6b6",
             position: "absolute",
-            top: "20%",
-            left: "25%",
-            width: "50%",
+
+            width: "80%",
             zIndex: "10",
             background: "#2a2525",
             padding: "30px",
+            transform: "translate(10%, 2%)",
             borderRadius: "20px",
           }}
         >
@@ -170,7 +171,6 @@ export default function BookOrder() {
                   placeholder="Name"
                   name="name"
                   onChange={handleChange}
-             
                 />
               </div>
 

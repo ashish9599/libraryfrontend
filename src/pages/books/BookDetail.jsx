@@ -32,8 +32,8 @@ export default function BookDetail() {
         const res = await getSinglebook(id);
         if (res.succuss) {
           setbook(res.book);
-          setloader(false);
         }
+        setloader(false);
       };
       fetch();
     } catch (error) {
@@ -63,11 +63,11 @@ export default function BookDetail() {
       const res = await REMOVEBook(id);
       if (res.succuss) {
         navigate("/");
-        setloader(false);
         toast.success("Book removed successfully");
       } else {
         toast.error(res.message);
       }
+      setloader(false);
     } catch (error) {
       console.error(error);
     }
@@ -78,25 +78,25 @@ export default function BookDetail() {
       if (cartPresent) {
         setloader(true);
         const res = await removeCart(id);
-        console.log("r=>",res);
+        console.log("r=>", res);
         if (res.succuss) {
           toast.success("Book deleted from cart");
           setCartP(false);
-          setloader(false);
         } else {
           toast.error(res.message);
         }
+        setloader(false);
       } else {
         setloader(true);
         const res = await addBookToCart(id);
-        console.log("a=>",res);
+        console.log("a=>", res);
         if (res.succuss) {
           toast.success("Book added to Cart");
           setCartP(true);
-          setloader(false);
         } else {
           toast.error(res.message);
         }
+        setloader(false);
       }
     } catch (error) {
       console.error(error);
@@ -151,7 +151,7 @@ export default function BookDetail() {
               className={styles.bokside}
               style={{
                 display: "flex",
-                gap: "2%",
+                gap: "20px",
                 flexWrap: "wrap",
                 width: "80%",
                 transform: "translate(12.5%, 70px)",
@@ -160,7 +160,7 @@ export default function BookDetail() {
             >
               {book && (
                 <>
-                  <div style={{ width: "33%" }}>
+                  <div style={{ width: "100%" }}>
                     <div className="card" style={{ height: "100%" }}>
                       <img
                         style={{ height: "75%" }}
@@ -176,7 +176,7 @@ export default function BookDetail() {
                             <div>
                               <button
                                 type="button"
-                                className={`btn btn-danger } `}
+                                className={`btn btn-danger ${styles.mg}`}
                                 onClick={Removebook}
                                 style={{ marginRight: "10px" }}
                               >
@@ -203,7 +203,7 @@ export default function BookDetail() {
                   <div
                     className={styles.lb}
                     style={{
-                      width: "65%",
+                      width: "100%",
                       display: "flex",
                       flexDirection: "column",
                       justifyContent: "space-between",
