@@ -32,7 +32,7 @@ const Login = () => {
       return toast.info("Please fill the form");
     }
     try {
-      setloader(true);
+      // setloader(true);
       const res = await loginUser(credential);
       console.log("login", res);
       if (res.succuss) {
