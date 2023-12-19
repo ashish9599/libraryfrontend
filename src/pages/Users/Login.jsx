@@ -32,25 +32,25 @@ const Login = () => {
       return toast.info("Please fill the form");
     }
     try {
-      setloader(true)
+      setloader(true);
       const res = await loginUser(credential);
-      console.log("l",res)
+      console.log("login", res);
       if (res.succuss) {
         navigate(`/`);
         toast.success(res.message);
       } else {
         toast.error(res.message);
       }
-      setloader(false)
+      setloader(false);
       setCredential({ email: "", password: "" });
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
 
   return (
     <>
-    <div
+      <div
         style={{
           position: "absolute",
           width: "100%",
@@ -58,7 +58,7 @@ const Login = () => {
           opacity: "0.55",
         }}
       >
-        {loader && <Loader/>}
+        {loader && <Loader />}
       </div>
       <div
         className="Login"

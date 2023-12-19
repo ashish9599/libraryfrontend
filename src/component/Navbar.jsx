@@ -45,7 +45,7 @@ const Navbar = () => {
     <>
       <nav
         className="navbar navbar-expand-lg navbar-light bg-light"
-        style={{ height: "10vh", alignItems: "center" }}
+        style={{ height: "10vh", alignItems: "center", flexWrap: "nowrap" }}
       >
         <div
           className={`navbar-collapse ${style.gap}`}
@@ -59,7 +59,14 @@ const Navbar = () => {
           </div>
           <div className={style.search}>
             <form onSubmit={handleSubmit} className="form-inline my-2 my-lg-0">
-              <div style={{ display: "flex", gap: "10px", width: "100%" }}>
+              <div
+                style={{
+                  display: "flex",
+                  gap: "10px",
+                  width: "90%",
+                  alignItems: "center",
+                }}
+              >
                 <input
                   className={`form-control mr-sm-2 p-sm-2 ${style.fs}`}
                   style={{ width: "100%" }}
@@ -122,12 +129,11 @@ const Navbar = () => {
                   style={{
                     alignItems: "center",
                     flexDirection: "row",
-                    justifyContent: "space-around",
+                    justifyContent: "end",
                   }}
                 >
                   <li className="nav-item active m-2">
                     <Link to={"/UserP"}>
-                      {" "}
                       <img
                         src={`http://localhost:9000/users/${user.userImage}`}
                         alt=""
@@ -154,7 +160,7 @@ const Navbar = () => {
                 style={{
                   alignItems: "center",
                   flexDirection: "row",
-                  justifyContent: "space-around",
+                  justifyContent: "end",
                 }}
               >
                 <li className="nav-item active m-2">

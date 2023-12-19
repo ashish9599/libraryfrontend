@@ -45,6 +45,7 @@ const App = () => {
               </ProtectedRoutes>
             }
           />
+
           <Route
             exact
             path="/UpdateUser"
@@ -54,14 +55,68 @@ const App = () => {
               </ProtectedRoutes>
             }
           />
+              {/* <Route exact path="/SingleBook/:id" element={<BookDetail />} /> */}
+          <Route
+            exact
+            path="/SingleBook/:id"
+            element={
+              <ProtectedRoutes>
+                <BookDetail />
+              </ProtectedRoutes>
+            }
+          />
+            {/* <Route exact path="/placedOrder/:bookId" element={<BookOrder />} /> */}
+          <Route
+            exact
+            path="/placedOrder/:bookId"
+            element={
+              <ProtectedRoutes>
+              <BookOrder />
+              </ProtectedRoutes>
+            }
+          />
+            {/* <Route exact path="/orderDetail/:orderId" element={<OrderDetail />} /> */}
+          <Route
+            exact
+            path="/orderDetail/:orderId"
+            element={
+              <ProtectedRoutes>
+               <OrderDetail />
+              </ProtectedRoutes>
+            }
+          />
+            {/* <Route exact path="/myCart" element={<MyCart />} /> */}
+          <Route
+            exact
+            path="/myCart"
+            element={
+              <ProtectedRoutes>
+             <MyCart />
+              </ProtectedRoutes>
+            }
+          />
+            {/* <Route exact path="/myOrder" element={<Myorder />} /> */}
+          <Route
+            exact
+            path="/myOrder"
+            element={
+              <ProtectedRoutes>
+               <Myorder />
+              </ProtectedRoutes>
+            }
+          />
+            {/* <Route exact path="/mybook" element={<Mybook />} /> */}
+          <Route
+            exact
+            path="/mybook"
+            element={
+              <ProtectedRoutes>
+                <Mybook />
+              </ProtectedRoutes>
+            }
+          />
+         
 
-          <Route exact path="/SingleBook/:id" element={<BookDetail />} />
-          <Route exact path="/placedOrder/:bookId" element={<BookOrder />} />
-          <Route exact path="/orderDetail/:orderId" element={<OrderDetail />} />
-
-          <Route exact path="/myCart" element={<MyCart />} />
-          <Route exact path="/myOrder" element={<Myorder />} />
-          <Route exact path="/mybook" element={<Mybook />} />
           <Route exact path="*" element={<Page404 />} />
         </Routes>
       </BrowserRouter>
