@@ -4,6 +4,7 @@ import { useAuthProvider } from "../hook/authHook";
 const intialState = {
   user: null,
   logout: () => {},
+  setProgress: () => {},
   UpdateUser: () => {},
   forget: () => {},
   search: () => {},

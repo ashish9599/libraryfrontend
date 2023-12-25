@@ -5,7 +5,8 @@ import { toast } from "react-toastify";
 
 import Addimage from "../../images/icons8-add-image-48.png";
 import styles from "../../styles/login.module.css";
-import Loader from "../Loader";
+
+import { useAuth } from "../../hook/authHook";
 const Register = () => {
   const navigate = useNavigate();
 
@@ -15,9 +16,10 @@ const Register = () => {
     password: "",
   });
   
-  const [loader, setloader] = useState(false);
+ 
   const [userImage, setUserImage] = useState(null);
   const titleRef = useRef(null);
+  const { setProgress } = useAuth();
   useEffect(() => {
     titleRef.current.focus();
   }, []);
@@ -27,24 +29,27 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setProgress(10)
     const { name, email, password } = credential;
     if (name === "" && email === "" && password === "") {
       return toast.info("Please fill the form");
     }
-
+    
     try {
-      setloader(true)
+      setProgress(40)
+     
       const res = await signUp(credential, userImage);
       
       if (res.succuss) {
+        setProgress(70)
         navigate(`/`);
         toast.success(res.message);
         setCredential({ name: "", email: "", password: "" });
       } else {
         toast(res.message);
       }
-      setloader(false);
+      setProgress(100)
+    
     } catch (error) {
       console.error(error);
     }
@@ -60,7 +65,7 @@ const Register = () => {
       opacity: "0.55",
     }}
   >
-    {loader && <Loader/>}
+   
   </div>
     <div
       className="Login"

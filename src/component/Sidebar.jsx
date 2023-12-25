@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useBook } from "../hook/bookHook";
 import style from "./home.module.css";
+import { useAuth } from "../hook/authHook";
 export default function Sidebar() {
   const { seachByCategory, searchBylanguage } = useBook();
   const categoryList = [
@@ -13,25 +14,30 @@ export default function Sidebar() {
     "Thriller",
     "Adventure",
   ];
+  const { setProgress } = useAuth();
   // const [category,setCategory]=useState("");
   // const [language,setlanguage]=useState("");
   const languagelist = ["English", "Hindi"];
   const handleCategory = async (e) => {
+    setProgress(10);
     const ind = e.target.value;
 
     const category = categoryList[ind];
     try {
       await seachByCategory(category);
+      setProgress(100);
     } catch (error) {
       console.error(error);
     }
   };
   const handlelanguage = async (e) => {
+    setProgress(10);
     const ind = e.target.value;
     const language = languagelist[ind];
 
     try {
       await searchBylanguage(language);
+      setProgress(100);
     } catch (error) {
       console.error(error);
     }

@@ -2,11 +2,13 @@ import Allbook from "../pages/books/Allbook";
 import Sidebar from "./Sidebar";
 
 const Home = () => {
-  return (
+  return (<>
     <div className="Home" style={{ display: "flex" }}>
       <Sidebar />
       <Allbook />
     </div>
+    
+  </>
   );
 };
 

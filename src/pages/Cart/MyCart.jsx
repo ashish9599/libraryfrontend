@@ -6,11 +6,13 @@ import { deleteAll, getUserCart } from "../../api/api";
 import { toast } from "react-toastify";
 import styles from "../books/book.module.css";
 import Loader from "../Loader";
+import { useAuth } from "../../hook/authHook";
 export default function MyCart() {
   const [cart, setCart] = useState(null);
   const [loader, setloader] = useState(false);
   const [render, setRender] = useState(false);
   // const inCart = true;
+  const { setProgress } = useAuth();
   useEffect(() => {
     try {
       const fetch = async () => {
@@ -29,13 +31,17 @@ export default function MyCart() {
 
   const handleClear = async () => {
     try {
+      setProgress(10)
       const res = await deleteAll();
+      setProgress(50)
       if (res.succuss) {
+        setProgress(80)
         toast.success("All deleted");
         setRender(!render);
       } else {
         toast.error(res.message);
       }
+      setProgress(100)
     } catch (error) {
       console.error(error);
     }

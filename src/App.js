@@ -15,12 +15,23 @@ import Myorder from "./pages/orders/Myorder";
 import BookOrder from "./pages/orders/BookOrder";
 import OrderDetail from "./pages/orders/OrderDetail";
 import ProtectedRoutes from "./component/ProtecdedRoutes";
+import LoadingBar from 'react-top-loading-bar'
+
+import { useAuth } from "./hook/authHook";
+import Footer from "./pages/footer/Footer";
 const App = () => {
+ 
+  const { progress } = useAuth();
+  
   return (
     <div className="App">
       <BrowserRouter>
         <Navbar />
-
+        <LoadingBar
+        color='#f11946'
+        progress={progress}
+        // onLoaderFinished={() => setProgress(0)}
+      />
         <Routes>
           {/* without user */}
           <Route exact path="/login" element={<Login />} />
@@ -119,6 +130,9 @@ const App = () => {
 
           <Route exact path="*" element={<Page404 />} />
         </Routes>
+        <div style={{marginTop:"100px"}}>
+         <Footer/>
+    </div>
       </BrowserRouter>
     </div>
   );

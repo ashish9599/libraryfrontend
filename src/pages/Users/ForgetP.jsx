@@ -3,14 +3,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { changePassword } from "../../api/api";
 import styles from "../../styles/login.module.css";
-import Loader from "../Loader";
+
+import { useAuth } from "../../hook/authHook";
 const Forget = () => {
   const [credential, setCredential] = useState({
     email: "",
     newPassword: "",
     confirmPassword: "",
   });
-  const [loader, setloader] = useState(false);
+  const { setProgress } = useAuth();
   const navigate = useNavigate();
   const titleRef = useRef(null);
   useEffect(() => {
@@ -20,28 +21,34 @@ const Forget = () => {
     setCredential({ ...credential, [e.target.name]: e.target.value });
   };
   const handleSubmit = async (e) => {
+
     e.preventDefault();
-  setloader(true)
-  const { email, password } = credential;
-  if (email === "" && password === "") {
-    return toast.info("Please fill the form");
-  }
-  try {
-    setloader(true)
-    const res = await changePassword(credential);
-    console.log(res);
-    if (res.succuss) {
-      navigate(`/login`);
-      setCredential({
-        email: "",
-        newPassword: "",
-        confirmPassword: "",
-      });
-      toast.success(res.message);
-    } else {
-      toast(res.message);
+    setProgress(10)
+   
+    const { email, password } = credential;
+    if (email === "" && password === "") {
+      return toast.info("Please fill the form");
     }
-    setloader(false)
+    try {
+      setProgress(20)
+   
+      const res = await changePassword(credential);
+      setProgress(60)
+      console.log(res);
+      if (res.succuss) {
+        navigate(`/login`);
+        setCredential({
+          email: "",
+          newPassword: "",
+          confirmPassword: "",
+        });
+        toast.success(res.message);
+        setProgress(90)
+      } else {
+        toast(res.message);
+      }
+      setProgress(100)
+  
     } catch (error) {
       console.error(error);
     }
@@ -57,7 +64,7 @@ const Forget = () => {
           opacity: "0.55",
         }}
       >
-        {loader && <Loader/>}
+     
       </div>
       <div
         className="Login"

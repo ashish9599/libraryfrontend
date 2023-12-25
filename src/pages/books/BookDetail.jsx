@@ -20,7 +20,7 @@ export default function BookDetail() {
 
   const [book, setbook] = useState(null);
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, setProgress } = useAuth();
   const { REMOVEBook } = useBook();
   const [cartPresent, setCartP] = useState(false);
 
@@ -59,15 +59,18 @@ export default function BookDetail() {
 
   const Removebook = async () => {
     try {
-      setloader(true);
+      setProgress(10);
+
       const res = await REMOVEBook(id);
+      setProgress(30);
       if (res.succuss) {
         navigate("/");
         toast.success("Book removed successfully");
+        setProgress(70);
       } else {
         toast.error(res.message);
       }
-      setloader(false);
+      setProgress(100);
     } catch (error) {
       console.error(error);
     }
@@ -76,27 +79,31 @@ export default function BookDetail() {
   const handleCart = async (id) => {
     try {
       if (cartPresent) {
-        setloader(true);
+      
+        setProgress(10);
         const res = await removeCart(id);
+
         console.log("r=>", res);
         if (res.succuss) {
-          toast.success("Book deleted from cart");
+          setProgress(60);
+          toast.warn("Book deleted from cart");
           setCartP(false);
         } else {
           toast.error(res.message);
         }
-        setloader(false);
+        setProgress(100);
       } else {
-        setloader(true);
+        setProgress(10);
         const res = await addBookToCart(id);
         console.log("a=>", res);
         if (res.succuss) {
+          setProgress(60);
           toast.success("Book added to Cart");
           setCartP(true);
+          setProgress(100);
         } else {
           toast.error(res.message);
         }
-        setloader(false);
       }
     } catch (error) {
       console.error(error);

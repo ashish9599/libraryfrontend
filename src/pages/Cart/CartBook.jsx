@@ -4,11 +4,12 @@ import { Link } from "react-router-dom";
 
 import { toast } from "react-toastify";
 import { HOST_ROOT } from "../../utils";
-
+import { useAuth } from "../../hook/authHook";
+import styles from "../books/book.module.css";
 export default function CartBook({ bookId, setRender, render,loader,setloader }) {
   const [book, setbook] = useState(null);
   const [placing, setPlacing] = useState(false);
-
+  const { setProgress } = useAuth();
   useEffect(() => {
     try {
       const fetch = async () => {
@@ -25,27 +26,30 @@ export default function CartBook({ bookId, setRender, render,loader,setloader })
 
   const handleRemove = async () => {
     try {
-      setloader(true)
+      setProgress(10)
+     
       const res = await removeCart(bookId);
+      setProgress(50)
       console.log("re>",res);
       if (res.succuss) {
+        setProgress(70)
         toast.success("Cart deleted succefully");
         setRender(!render);
       } else {
         toast.error(res.message);
       }
-      setloader(false)
+      setProgress(100)
+    
     } catch (error) {
       console.error(error);
     }
   };
-
   return (
     <>
      
       {book && (
         <>
-          <div className="card" style={{ width: "17.6rem" }}>
+          <div className={`card ${styles.card}`}>
             <img
               className="card-img-top"
               // src={`http://localhost:9000/books/${book.bookImage}`}

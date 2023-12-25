@@ -3,7 +3,8 @@ import { cancelOrder, getSinglebook } from "../../api/api";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { HOST_ROOT } from "../../utils";
-import Loader from "../Loader";
+import styles from "./order.module.css";
+import { useAuth } from "../../hook/authHook";
 
 export default function OrderDetail({
   bookId,
@@ -14,7 +15,8 @@ export default function OrderDetail({
   orderId,
 }) {
   const [book, setbook] = useState(null);
-  const [loader, setloader] = useState(false);
+
+  const { setProgress } = useAuth();
   useEffect(() => {
     try {
       const fetch = async () => {
@@ -32,16 +34,18 @@ export default function OrderDetail({
 
   const handleOrder = async () => {
     try {
-      setloader(true);
+      setProgress(10);
+
       const res = await cancelOrder(orderId);
-      
+      setProgress(40);
+
       if (res.succuss) {
         toast.success("Order Cancelled");
         setRender(!render);
       } else {
         toast.error(res.message);
       }
-      setloader(false);
+      setProgress(100);
     } catch (error) {
       console.error(error);
     }
@@ -49,19 +53,17 @@ export default function OrderDetail({
 
   return (
     <>
-    <div
+      <div
         style={{
           position: "absolute",
           width: "100%",
           zIndex: "10",
           opacity: "0.55",
         }}
-      >
-        {loader && <Loader/>}
-      </div>
+      ></div>
       {book && (
         <>
-          <div className="card" style={{ width: "17.6rem" }}>
+          <div className={`card ${styles.card}`}>
             <img
               className="card-img-top"
               // src={`http://localhost:9000/books/${book.bookImage}`}
@@ -75,8 +77,7 @@ export default function OrderDetail({
                 <p>Price:{price}</p>
               </div>
               <div style={{ marginBottom: "20px" }}>
-                <Link
-                 to={`/orderDetail/${orderId}`}>
+                <Link to={`/orderDetail/${orderId}`}>
                   <button type="button" className="btn btn-dark">
                     Order Detail
                   </button>

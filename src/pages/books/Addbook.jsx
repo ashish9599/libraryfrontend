@@ -4,7 +4,8 @@ import { useBook } from "../../hook/bookHook";
 
 import Addimage from "../../images/icons8-add-image-48.png";
 import { addInventory } from "../../api/api";
-import Loader from "../Loader";
+
+import { useAuth } from "../../hook/authHook";
 const Addbook = ({ addbookform, setAddbook }) => {
   // name, desciption, price, available, author, category
   const category = [
@@ -27,9 +28,10 @@ const Addbook = ({ addbookform, setAddbook }) => {
     language: "",
   });
   const [available, setAvailable] = useState(false);
-  const [loader, setloader] = useState(false);
+  
   const [bookImage, setBookImage] = useState(null);
   const { addBookfrom } = useBook();
+  const { setProgress } = useAuth();
   const titleRef = useRef(null);
   useEffect(() => {
     titleRef.current.focus();
@@ -39,6 +41,7 @@ const Addbook = ({ addbookform, setAddbook }) => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setProgress(10);
     try {
       const { name, desciption, price, author, qty, category, language } = book;
       if (
@@ -52,19 +55,23 @@ const Addbook = ({ addbookform, setAddbook }) => {
       ) {
         return toast.info("Please fill the form");
       }
-      setloader(true);
+      setProgress(20);
+     
       const res = await addBookfrom(book, available, bookImage);
+      setProgress(40);
       console.log("in c", res);
       if (res.succuss) {
         const invent = await addInventory(res.book._id, book.qty);
+        setProgress(70);
         console.log(invent);
         setAddbook(!addbookform);
         toast.success("Book added successfully");
+        setProgress(900);
       } else {
         toast.error(res.message);
       }
-      setloader(false);
-
+      
+      setProgress(100);
       setbook({
         name: "",
         desciption: "",
@@ -89,7 +96,7 @@ const Addbook = ({ addbookform, setAddbook }) => {
           opacity: "0.55",
         }}
       >
-        {loader && <Loader />}
+       
       </div>
       <div className="Addbook" style={{ width: "100vw" }}>
         <div>

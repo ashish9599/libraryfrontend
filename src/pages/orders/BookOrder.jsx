@@ -9,7 +9,8 @@ import {
 } from "../../api/api";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import Loader from "../Loader";
+
+import { useAuth } from "../../hook/authHook";
 // import { useAuth } from "../../hook/authHook";
 
 export default function BookOrder() {
@@ -17,8 +18,8 @@ export default function BookOrder() {
   const [inventory, setInventory] = useState(null);
   const [render, setRender] = useState(false);
   const [newQTY, setQty] = useState(0);
-  // const { user } = useAuth();
-  const [loader, setloader] = useState(false);
+  const { setProgress } = useAuth();
+
   const [order, setOrder] = useState({
     name: "",
     address: "",
@@ -67,15 +68,18 @@ export default function BookOrder() {
     const { name, address, price } = order;
     const pr = price * newQTY;
     try {
+      setProgress(10);
       if (name === "" && address === "") {
         return toast.error("Please fill the all feilds");
       }
       if (newQTY > inventory.bookLeft) {
         return toast.info(`Only ${inventory.bookLeft} left`);
       }
-      setloader(true);
+      setProgress(20);
+
       const res = await placedOrder(bookId, pr, newQTY);
       console.log("ord", res);
+      setProgress(50);
       if (res.succuss) {
         const newRes = await bookSold(bookId, newQTY);
         if (newRes.succuss) {
@@ -83,6 +87,7 @@ export default function BookOrder() {
           const cartR = await getSingleCart(bookId);
 
           if (cartR.succuss) {
+            setProgress(70);
             await removeCart(bookId);
           }
           toast.success("Order Placed");
@@ -90,7 +95,8 @@ export default function BookOrder() {
         } else {
           toast.error(newRes.message);
         }
-        setloader(false);
+
+        setProgress(100);
       } else {
       }
     } catch (error) {
@@ -112,9 +118,7 @@ export default function BookOrder() {
 
           transform: "translate(24%, 50px)",
         }}
-      >
-        {loader && <Loader />}
-      </div>
+      ></div>
       <>
         <form
           action=""

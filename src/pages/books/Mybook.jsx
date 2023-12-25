@@ -100,7 +100,7 @@ export default function Mybook() {
           )}
           {allbook &&
             allbook.map((book, i) => (
-              <div className="card" style={{ width: "17.6rem" }} key={i}>
+              <div className={`card ${styles.card}`} key={i}>
                 <img
                   className="card-img-top"
                   // src={`http://localhost:9000/books/${book.bookImage}`}

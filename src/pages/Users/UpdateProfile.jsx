@@ -4,15 +4,14 @@ import { toast } from "react-toastify";
 import { useAuth } from "../../hook/authHook";
 import Addimage from "../../images/icons8-add-image-48.png";
 import styles from "../../styles/login.module.css";
-import Loader from "../Loader";
+
 const UpdateProfile = () => {
-  const { user } = useAuth();
+  const { user ,setProgress} = useAuth();
   const [credential, setCredential] = useState({
     name: user.name,
     email: user.email,
   });
 
-  const [loader, setloader] = useState(false);
   const [userImage, setUserImage] = useState(null);
   const navigate = useNavigate();
   const { UpdateUser } = useAuth();
@@ -25,22 +24,25 @@ const UpdateProfile = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setProgress(10)
     const { name, email } = credential;
     if (email === "" && name === "") {
       return toast.info("Please fill the form");
     }
     try {
-      setloader(true)
+      setProgress(40)
+      
       const res = await UpdateUser(credential, userImage);
       if (res.succuss) {
         navigate(`/UserP`);
         toast.success(res.message);
+        setProgress(70)
         setCredential({ name: "", email: "" });
       } else {
         toast.error(res.message);
       }
-      setloader(false);
+      setProgress(100)
+     
     } catch (error) {
       console.error(error);
     }
@@ -56,7 +58,7 @@ const UpdateProfile = () => {
       opacity: "0.55",
     }}
   >
-    {loader && <Loader/>}
+   
   </div>
       <div
         className="Login"

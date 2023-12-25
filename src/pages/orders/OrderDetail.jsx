@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import styles from "./order.module.css";
 import { HOST_ROOT } from "../../utils";
 import Loader from "../Loader";
+import { useAuth } from "../../hook/authHook";
 const OrderDetail = () => {
   const [order, setOrder] = useState(null);
   const [bookId, setBookId] = useState(null);
@@ -12,6 +13,7 @@ const OrderDetail = () => {
   const [loader, setloader] = useState(false);
   const { orderId } = useParams();
   const navigate = useNavigate();
+  const { setProgress } = useAuth();
   useEffect(() => {
     try {
       const fetch = async () => {
@@ -44,16 +46,20 @@ const OrderDetail = () => {
   }, [bookId]);
   const handleOrder = async () => {
     try {
-      setloader(true);
+      setProgress(10);
+     
       const res = await cancelOrder(orderId);
-      
+      setProgress(60);
+
       if (res.succuss) {
         navigate(`/myOrder`);
         toast.success("Order Cancelled");
       } else {
         toast.error(res.message);
       }
-      setloader(false);
+      setProgress(100);
+
+     
     } catch (error) {
       console.error(error);
     }
@@ -61,7 +67,7 @@ const OrderDetail = () => {
 
   return (
     <>
-     <div
+      <div
         style={{
           position: "absolute",
           width: "100%",
@@ -69,7 +75,7 @@ const OrderDetail = () => {
           opacity: "0.55",
         }}
       >
-        {loader && <Loader/>}
+        {loader && <Loader />}
       </div>
       <div
         style={{
@@ -151,8 +157,8 @@ const OrderDetail = () => {
                       className={styles.oc}
                       style={{
                         justifyContent: "space-between",
-                     
-                       padding:"35px 0 0 10px"
+
+                        padding: "35px 0 0 10px",
                       }}
                     >
                       <div>

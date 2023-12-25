@@ -10,6 +10,7 @@ export const useAuth = () => {
 
 export const useAuthProvider = () => {
   const [user, setUser] = useState(null);
+  const [progress, setProgress] = useState(0);
   const [userSearch, setSearchUser] = useState([]);
   useEffect(() => {
     try {
@@ -78,6 +79,8 @@ export const useAuthProvider = () => {
   };
 
   return {
+    progress,
+    setProgress,
     user: user,
     logout,
     loginUser,

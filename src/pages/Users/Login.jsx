@@ -3,15 +3,15 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuth } from "../../hook/authHook";
 import styles from "../../styles/login.module.css";
-import Loader from "../Loader";
+
 const Login = () => {
   const [credential, setCredential] = useState({
     email: "",
     password: "",
   });
-  const [loader, setloader] = useState(false);
+ 
   const navigate = useNavigate();
-  const { user, loginUser } = useAuth();
+  const { user, loginUser,setProgress } = useAuth();
   const titleRef = useRef(null);
   useEffect(() => {
     titleRef.current.focus();
@@ -26,22 +26,25 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setProgress(10)
     const { email, password } = credential;
     if (email === "" && password === "") {
       return toast.info("Please fill the form");
     }
     try {
-      // setloader(true);
+      setProgress(40)
+     
       const res = await loginUser(credential);
       console.log("login", res);
       if (res.succuss) {
+        setProgress(70)
         navigate(`/`);
         toast.success(res.message);
       } else {
         toast.error(res.message);
       }
-      setloader(false);
+      setProgress(100)
+   
       setCredential({ email: "", password: "" });
     } catch (error) {
       console.log(error);
@@ -58,7 +61,7 @@ const Login = () => {
           opacity: "0.55",
         }}
       >
-        {loader && <Loader />}
+       
       </div>
       <div
         className="Login"
