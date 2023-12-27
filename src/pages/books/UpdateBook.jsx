@@ -73,16 +73,7 @@ const UpdateBook = ({ bookId, books, setUpdate, update }) => {
 
   return (
     <>
-      <div
-        style={{
-          position: "absolute",
-          width: "100%",
-          zIndex: "10",
-          opacity: "0.55",
-        }}
-      >
       
-      </div>
       <div>
         {/* <div className="UpdateBook" style={{ width: "100vw" }}> */}
         {/* <div style={{ textAlign: "center" }}>
@@ -95,7 +86,8 @@ const UpdateBook = ({ bookId, books, setUpdate, update }) => {
             width: "70%",
             position: "absolute",
             zIndex: "10",
-            padding: "25px",
+            padding: "25px"
+            ,paddingBottom:"100px",
             borderRadius: "10px",
             transform: "translate(17%, 0px)",
             border: "1px solid rgb(219 236 250)",

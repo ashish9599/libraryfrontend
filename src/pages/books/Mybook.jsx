@@ -30,23 +30,17 @@ export default function Mybook() {
   },[]);
   return (
     <>
-     <div style={{
-      position: "absolute",
-    width: "72%",
-   zIndex:"10",
-   opacity:"0.55",
-    transform: "translate(24%, 50px)"}}>
-
     {loader&&<Loader/> }
-    </div>
       {addBook && <Addbook addbookform={addBook} setAddbook={setAddbook} />}
       <div
         style={{
           width: "100wh",
-          padding: "56px 0px",
+          padding: "56px 0px"
+          ,paddingBottom:"100px"
         }}
       >
-        <div
+        {!loader&&<>
+          <div
           className={styles.mrl}
           style={{
             display: "flex",
@@ -77,6 +71,7 @@ export default function Mybook() {
             </>
           )}
         </div>
+        </>}
 
         <div
           style={{

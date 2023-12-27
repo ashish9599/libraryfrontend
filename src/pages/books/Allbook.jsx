@@ -35,20 +35,15 @@ export default function Allbook() {
 
   return (
     <>
-      <div
-        style={{
-          position: "absolute",
-          width: "72%",
-          zIndex: "10",
-          opacity: "0.55",
-          transform: "translate(24%, 50px)",
-        }}
-      >
-        {loader && <Loader />}
-      </div>
+     
       {
         <>
-          <div style={{ width: "100vw" }}>
+        <div>
+
+        {loader && <Loader  />}
+     
+          <div style={{ width: "90vw"
+          ,paddingBottom:"100px" }}>
             <div
               className={styles.boks}
               style={{
@@ -92,6 +87,7 @@ export default function Allbook() {
                 ))}
             </div>
           </div>
+      </div>
         </>
       }
     </>

@@ -45,7 +45,7 @@ const Navbar = () => {
     <>
       <nav
         className="navbar navbar-expand-lg navbar-light bg-light"
-        style={{ height: "10vh", alignItems: "center", flexWrap: "nowrap" }}
+        style={{ alignItems: "center", flexWrap: "nowrap" }}
       >
         <div
           className={`navbar-collapse ${style.gap}`}
@@ -92,7 +92,7 @@ const Navbar = () => {
                   background: "#ecf5fd",
                   overflow: "hidden",
                   maxHeight: "350px",
-                  top: "50px",
+                  top: "63px",
                   zIndex: "10",
                 }}
               >
@@ -102,14 +102,16 @@ const Navbar = () => {
                   {name.length > 1 &&
                     allbook.map((book, i) => (
                       <>
-                        <Link
+                        <Link 
                           to={`/SingleBook/${book._id}`}
                           onClick={() => setName("")}
                           key={i}
+                          style={{color:"black"}}
                         >
                           <li
                             style={{
-                              border: "1px solid rgb(25 25 25 / 12%)",
+                              borderBottom: "1px solid rgb(25 25 25 / 12%)",
+                              height:"35px"
                             }}
                           >
                             {book.name}

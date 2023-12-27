@@ -67,23 +67,16 @@ const OrderDetail = () => {
 
   return (
     <>
-      <div
-        style={{
-          position: "absolute",
-          width: "100%",
-          zIndex: "10",
-          opacity: "0.55",
-        }}
-      >
+    
         {loader && <Loader />}
-      </div>
+    
       <div
         style={{
           width: "81%",
           left: " 10.2%",
           position: "absolute",
-
-          padding: "20px 0px",
+          padding: "20px 0px"
+         
         }}
       >
         <Link to={`/myOrder`}>
@@ -99,7 +92,7 @@ const OrderDetail = () => {
 
       {
         <>
-          <div style={{ width: "100vw" }}>
+          <div style={{ width: "100vw" ,paddingBottom:"100px", }}>
             <div
               style={{
                 display: "flex",
@@ -108,7 +101,7 @@ const OrderDetail = () => {
                 width: "80%",
                 transform: "translate(12.5%, 70px)",
                 background: "aliceblue",
-                height: "430px",
+                // height: "430px",
               }}
             >
               {book && (

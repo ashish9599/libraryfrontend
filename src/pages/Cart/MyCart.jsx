@@ -49,45 +49,41 @@ export default function MyCart() {
 
   return (
     <>
-     <div style={{
-      position: "absolute",
-    width: "72%",
-   zIndex:"10",
-   opacity:"0.55",
-    transform: "translate(24%, 50px)"}}>
-
     {loader&&<Loader/> }
-    </div>
       <div
         style={{
           width: "100vw",
-          position: "absolute",
-          padding: "56px 0px",
+         
+          padding: "56px 0px"
+          ,paddingBottom:"100px"
         }}
       >
-        <div
+        {!loader&&<>
+          <div
           className={styles.mrl}
           style={{
             display: "flex",
             justifyContent: "space-between",
           }}
         >
-          <div>
-            <Link to={`/`}>
-              <span>
-                <img
-                  style={{ width: "30px" }}
-                  src="https://iridescent-faloodeh-3725ab.netlify.app/assets/back.png"
-                  alt=""
-                />
-              </span>
-            </Link>
-          </div>
-          <button type="button" className="btn btn-dark" onClick={handleClear}>
-            Clear All
-          </button>
+                  <div>
+                        <Link to={`/`}>
+                          <span>
+                            <img
+                              style={{ width: "30px" }}
+                              src="https://iridescent-faloodeh-3725ab.netlify.app/assets/back.png"
+                              alt=""
+                            />
+                          </span>
+                        </Link>     
+                  </div>
+                <button type="button" className="btn btn-dark" onClick={handleClear}>
+                  Clear All
+                </button>
         </div>
 
+        </>}
+        
         <div
           style={{
             display: "flex",

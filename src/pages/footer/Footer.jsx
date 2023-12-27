@@ -3,6 +3,7 @@ import './footer.css';
 export default function Footer() {
   return (
   <>
+  <div >
   <section id="contact">
             <h1 className="section-heading mb50px">
                 <span>
@@ -70,6 +71,7 @@ export default function Footer() {
                 </ul>
             </div>
         </section>
+    </div>
   </>
   )
 }

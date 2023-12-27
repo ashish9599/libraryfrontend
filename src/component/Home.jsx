@@ -3,11 +3,11 @@ import Sidebar from "./Sidebar";
 
 const Home = () => {
   return (<>
-    <div className="Home" style={{ display: "flex" }}>
-      <Sidebar />
+     <div style={{display:"flex"}}>
+     <Sidebar />
       <Allbook />
-    </div>
-    
+     </div>
+   
   </>
   );
 };

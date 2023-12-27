@@ -112,16 +112,8 @@ export default function BookDetail() {
 
   return (
     <>
-      <div
-        style={{
-          position: "absolute",
-          width: "100%",
-          zIndex: "10",
-          opacity: "0.55",
-        }}
-      >
+     
         {loader && <Loader />}
-      </div>
       {updateBook && (
         <UpdateBook
           bookId={id}
@@ -136,8 +128,8 @@ export default function BookDetail() {
           width: "81%",
           left: " 10.2%",
           position: "absolute",
-
           padding: "20px 0px",
+         
         }}
       >
         <Link to={`/`}>
@@ -153,7 +145,7 @@ export default function BookDetail() {
 
       {
         <>
-          <div style={{ width: "100vw" }}>
+          <div style={{ width: "100vw", paddingBottom:"100px", }}>
             <div
               className={styles.bokside}
               style={{

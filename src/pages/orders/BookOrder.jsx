@@ -109,27 +109,18 @@ export default function BookOrder() {
 
   return (
     <>
-      <div
-        style={{
-          position: "absolute",
-          width: "72%",
-          zIndex: "10",
-          opacity: "0.55",
-
-          transform: "translate(24%, 50px)",
-        }}
-      ></div>
+      
       <>
         <form
           action=""
           style={{
             color: "#b8b6b6",
             position: "absolute",
-
+            padding: "30px"
+            ,paddingBottom:"100px",
             width: "80%",
             zIndex: "10",
             background: "#2a2525",
-            padding: "30px",
             transform: "translate(10%, 2%)",
             borderRadius: "20px",
           }}

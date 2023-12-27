@@ -48,9 +48,11 @@ export default function Sidebar() {
       <div
         className={`${style.side} ${style.fs}`}
         style={{
-          height: "100vh",
-          position: "fixed",
-          top: "21%",
+          // height: "100vh",
+          position: "sticky",
+          width: "12%",
+          // top: "21%",
+          padding:"20px"
         }}
       >
         <div
@@ -58,7 +60,6 @@ export default function Sidebar() {
             // height: "70%",
             background: "black",
             color: "gray",
-            width: "100%",
             border: "1px solid black",
             borderRadius: "5px",
             padding: "10px",

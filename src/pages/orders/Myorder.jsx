@@ -28,23 +28,18 @@ export default function Myorder() {
 
   return (
     <>
-    <div style={{
-      position: "absolute",
-    width: "72%",
-   zIndex:"10",
-   opacity:"0.55",
-    transform: "translate(24%, 50px)"}}>
-
+    
     {loader&&<Loader/> }
-    </div>
       <div
         style={{
           width: "100vw",
-          position: "absolute",
-          padding: "56px 0px",
+           padding: "56px 0px"
+          ,paddingBottom:"100px"
         }}
       >
-        <div className={styles.mrl}>
+       
+        {!loader&&<>
+          <div className={styles.mrl}>
           <Link to={`/myCart`}>
             <span>
               <img
@@ -55,6 +50,7 @@ export default function Myorder() {
             </span>
           </Link>
         </div>
+        </>}
 
         <div
           style={{

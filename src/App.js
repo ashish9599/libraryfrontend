@@ -26,12 +26,12 @@ const App = () => {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar />
         <LoadingBar
         color='#f11946'
         progress={progress}
         // onLoaderFinished={() => setProgress(0)}
       />
+        <Navbar />
         <Routes>
           {/* without user */}
           <Route exact path="/login" element={<Login />} />
@@ -126,13 +126,9 @@ const App = () => {
               </ProtectedRoutes>
             }
           />
-         
-
           <Route exact path="*" element={<Page404 />} />
-        </Routes>
-        <div style={{marginTop:"100px"}}>
+        </Routes>      
          <Footer/>
-    </div>
       </BrowserRouter>
     </div>
   );

@@ -53,14 +53,7 @@ export default function OrderDetail({
 
   return (
     <>
-      <div
-        style={{
-          position: "absolute",
-          width: "100%",
-          zIndex: "10",
-          opacity: "0.55",
-        }}
-      ></div>
+     
       {book && (
         <>
           <div className={`card ${styles.card}`}>

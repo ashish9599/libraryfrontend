@@ -88,17 +88,8 @@ const Addbook = ({ addbookform, setAddbook }) => {
 
   return (
     <>
-      <div
-        style={{
-          position: "absolute",
-          width: "100%",
-          zIndex: "10",
-          opacity: "0.55",
-        }}
-      >
-       
-      </div>
-      <div className="Addbook" style={{ width: "100vw" }}>
+      
+      <div className="Addbook" style={{ width: "100vw",paddingBottom:"100px" }}>
         <div>
           <form
             style={{
