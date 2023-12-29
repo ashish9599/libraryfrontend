@@ -53,7 +53,6 @@ export default function OrderDetail({
 
   return (
     <>
-     
       {book && (
         <>
           <div className={`card ${styles.card}`}>

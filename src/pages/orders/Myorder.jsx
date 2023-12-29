@@ -13,12 +13,12 @@ export default function Myorder() {
   useEffect(() => {
     try {
       const fetch = async () => {
-        setloader(true)
+        setloader(true);
         const res = await getUserOrder();
         if (res.succuss) {
           setOrder(res.order);
         }
-        setloader(false)
+        setloader(false);
       };
       fetch();
     } catch (error) {
@@ -28,34 +28,34 @@ export default function Myorder() {
 
   return (
     <>
-    
-    {loader&&<Loader/> }
+      {loader && <Loader />}
       <div
         style={{
-          width: "100vw",
-           padding: "56px 0px"
-          ,paddingBottom:"100px"
+          // width: "100vw",
+          padding: "56px 0px",
+          paddingBottom: "100px",
         }}
       >
-       
-        {!loader&&<>
-          <div className={styles.mrl}>
-          <Link to={`/myCart`}>
-            <span>
-              <img
-                style={{ width: "30px" }}
-                src="https://iridescent-faloodeh-3725ab.netlify.app/assets/back.png"
-                alt=""
-              />
-            </span>
-          </Link>
-        </div>
-        </>}
+        {!loader && (
+          <>
+            <div className={styles.mrl}>
+              <Link to={`/myCart`}>
+                <span>
+                  <img
+                    style={{ width: "30px" }}
+                    src="https://iridescent-faloodeh-3725ab.netlify.app/assets/back.png"
+                    alt=""
+                  />
+                </span>
+              </Link>
+            </div>
+          </>
+        )}
 
         <div
           style={{
             display: "flex",
-            columnGap: "11.3%",
+            columnGap: "10.8%",
             rowGap: "50px",
             flexWrap: "wrap",
             width: "80%",

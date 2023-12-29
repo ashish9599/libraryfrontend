@@ -1,23 +1,16 @@
-
-import ALt from '../assets/ATB3o.gif'
+import ALt from "../assets/ATB3o.gif";
+import styles from "./books/book.module.css";
 const Loader = () => {
-
   return (
-    <div style={{
-    height:"15vmax",
-   
-  }}>
-
- <div style={    {width: "18.1%",
-    background: 'blueviolet',
-    height: "100%",
-    margin: 'auto'}}>
-
-        <img src={ALt} alt="loading"  />
-
- </div>
-      
-    
+    <div style={{}}>
+      <div
+        style={{
+          // background: "blueviolet",
+          textAlign: "center",
+        }}
+      >
+        <img src={ALt} alt="loading" className={styles.imgh} />
+      </div>
     </div>
   );
 };

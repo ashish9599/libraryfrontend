@@ -5,9 +5,9 @@
 .mrl {
   padding-left: 130px;
 }
-.card{
+.card {
   width: 17.6rem;
-  transition: all  0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
   height: 412px;
 }
 /* .card::after{
@@ -26,19 +26,17 @@
   width: 0rem;
   opacity: 0.4;
 } */
-.card>img{
- 
-  transition: all  0.4s ease-in-out;
-
+.card > img {
+  transition: all 0.4s ease-in-out;
 }
-.card:hover{
-border-top-right-radius: 100px;
-border-bottom-right-radius: 100px;
+.card:hover {
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
   scale: 1.05;
   box-shadow: 0px 0px 10px 2px rgb(168, 183, 196);
 }
-.card:hover>img{
-border-top-right-radius: 100px;
+.card:hover > img {
+  border-top-right-radius: 100px;
 }
 @media only screen and (max-width: 900px) {
   .oc {

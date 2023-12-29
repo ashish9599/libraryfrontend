@@ -7,10 +7,7 @@ const UserP = () => {
 
   return (
     <>
-      <div
-        className="Login"
-        style={{ height: "90vh", width: "100vw", background: "black" }}
-      >
+      <div className="Login" style={{ height: "90vh", background: "black" }}>
         <div className={styles.loginContainer}>
           <div
             className="card"

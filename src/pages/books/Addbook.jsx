@@ -28,7 +28,7 @@ const Addbook = ({ addbookform, setAddbook }) => {
     language: "",
   });
   const [available, setAvailable] = useState(false);
-  
+
   const [bookImage, setBookImage] = useState(null);
   const { addBookfrom } = useBook();
   const { setProgress } = useAuth();
@@ -56,7 +56,7 @@ const Addbook = ({ addbookform, setAddbook }) => {
         return toast.info("Please fill the form");
       }
       setProgress(20);
-     
+
       const res = await addBookfrom(book, available, bookImage);
       setProgress(40);
       console.log("in c", res);
@@ -70,7 +70,7 @@ const Addbook = ({ addbookform, setAddbook }) => {
       } else {
         toast.error(res.message);
       }
-      
+
       setProgress(100);
       setbook({
         name: "",
@@ -88,8 +88,7 @@ const Addbook = ({ addbookform, setAddbook }) => {
 
   return (
     <>
-      
-      <div className="Addbook" style={{ width: "100vw",paddingBottom:"100px" }}>
+      <div className="Addbook" style={{ paddingBottom: "100px" }}>
         <div>
           <form
             style={{
@@ -101,6 +100,7 @@ const Addbook = ({ addbookform, setAddbook }) => {
               width: "70%",
               border: "1px solid rgb(219 236 250)",
               background: "#ecf5fd",
+              minWidth: "29vmax",
             }}
             onSubmit={handleSubmit}
             encType="multipart/form-data"

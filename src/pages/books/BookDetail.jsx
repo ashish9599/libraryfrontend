@@ -79,7 +79,6 @@ export default function BookDetail() {
   const handleCart = async (id) => {
     try {
       if (cartPresent) {
-      
         setProgress(10);
         const res = await removeCart(id);
 
@@ -112,8 +111,7 @@ export default function BookDetail() {
 
   return (
     <>
-     
-        {loader && <Loader />}
+      {loader && <Loader />}
       {updateBook && (
         <UpdateBook
           bookId={id}
@@ -129,7 +127,6 @@ export default function BookDetail() {
           left: " 10.2%",
           position: "absolute",
           padding: "20px 0px",
-         
         }}
       >
         <Link to={`/`}>
@@ -145,7 +142,7 @@ export default function BookDetail() {
 
       {
         <>
-          <div style={{ width: "100vw", paddingBottom:"100px", }}>
+          <div style={{ paddingBottom: "100px" }}>
             <div
               className={styles.bokside}
               style={{
@@ -155,6 +152,7 @@ export default function BookDetail() {
                 width: "80%",
                 transform: "translate(12.5%, 70px)",
                 background: "aliceblue",
+                minWidth: "34vmax",
               }}
             >
               {book && (
@@ -205,10 +203,10 @@ export default function BookDetail() {
                       width: "100%",
                       display: "flex",
                       flexDirection: "column",
-                      justifyContent: "space-between",
+                      // justifyContent: "space-between",
                     }}
                   >
-                    <div>
+                    <div style={{ padding: "15px" }}>
                       <div
                         style={{
                           background: "aliceblue",

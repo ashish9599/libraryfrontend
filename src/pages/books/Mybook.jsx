@@ -16,62 +16,65 @@ export default function Mybook() {
   useEffect(() => {
     try {
       const fetch = async () => {
-        setloader(true)
+        setloader(true);
         const res = await getUserBook();
         if (res.succuss) {
           setAllbook(res.book);
         }
-        setloader(false)
+        setloader(false);
       };
       fetch();
     } catch (error) {
       console.error(error);
     }
-  },[]);
+  }, []);
   return (
     <>
-    {loader&&<Loader/> }
+      {loader && <Loader />}
       {addBook && <Addbook addbookform={addBook} setAddbook={setAddbook} />}
       <div
         style={{
-          width: "100wh",
-          padding: "56px 0px"
-          ,paddingBottom:"100px"
+          // width: "100wh",
+          padding: "56px 0px",
+          paddingBottom: "100px",
         }}
       >
-        {!loader&&<>
-          <div
-          className={styles.mrl}
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          <Link to={`/`}>
-            <span>
-              <img
-                style={{ width: "30px" }}
-                src="https://iridescent-faloodeh-3725ab.netlify.app/assets/back.png"
-                alt=""
-              />
-            </span>
-          </Link>
+        {!loader && (
+          <>
+            <div
+              className={styles.mrl}
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                minWidth: "40vmax",
+              }}
+            >
+              <Link to={`/`}>
+                <span>
+                  <img
+                    style={{ width: "30px" }}
+                    src="https://iridescent-faloodeh-3725ab.netlify.app/assets/back.png"
+                    alt=""
+                  />
+                </span>
+              </Link>
 
-          {user && (
-            <>
-              <button
-                type="button"
-                className={`btn btn-${addBook ? "danger" : "success"} `}
-                onClick={(e) => {
-                  setAddbook(!addBook);
-                }}
-              >
-                {addBook ? "Cancel" : "Addbook"}
-              </button>
-            </>
-          )}
-        </div>
-        </>}
+              {user && (
+                <>
+                  <button
+                    type="button"
+                    className={`btn btn-${addBook ? "danger" : "success"} `}
+                    onClick={(e) => {
+                      setAddbook(!addBook);
+                    }}
+                  >
+                    {addBook ? "Cancel" : "Addbook"}
+                  </button>
+                </>
+              )}
+            </div>
+          </>
+        )}
 
         <div
           style={{

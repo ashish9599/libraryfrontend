@@ -6,7 +6,13 @@ import { toast } from "react-toastify";
 import { HOST_ROOT } from "../../utils";
 import { useAuth } from "../../hook/authHook";
 import styles from "../books/book.module.css";
-export default function CartBook({ bookId, setRender, render,loader,setloader }) {
+export default function CartBook({
+  bookId,
+  setRender,
+  render,
+  loader,
+  setloader,
+}) {
   const [book, setbook] = useState(null);
   const [placing, setPlacing] = useState(false);
   const { setProgress } = useAuth();
@@ -26,27 +32,25 @@ export default function CartBook({ bookId, setRender, render,loader,setloader })
 
   const handleRemove = async () => {
     try {
-      setProgress(10)
-     
+      setProgress(10);
+
       const res = await removeCart(bookId);
-      setProgress(50)
-      console.log("re>",res);
+      setProgress(50);
+      console.log("re>", res);
       if (res.succuss) {
-        setProgress(70)
+        setProgress(70);
         toast.success("Cart deleted succefully");
         setRender(!render);
       } else {
         toast.error(res.message);
       }
-      setProgress(100)
-    
+      setProgress(100);
     } catch (error) {
       console.error(error);
     }
   };
   return (
     <>
-     
       {book && (
         <>
           <div className={`card ${styles.card}`}>
@@ -56,13 +60,16 @@ export default function CartBook({ bookId, setRender, render,loader,setloader })
               src={`${HOST_ROOT}/books/${book.bookImage}`}
               alt="Cardcap"
             />
-            <div className="card-body">
+            <div
+              className="card-body"
+              style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+            >
               <h5 className="card-title">{book.name}</h5>
               <Link to={`/SingleBook/${book._id}`}>
                 <button
                   type="button"
                   className="btn btn-dark"
-                  style={{ marginRight: "10px" }}
+                  style={{ width: "12vmax" }}
                 >
                   Detail
                 </button>
@@ -72,15 +79,16 @@ export default function CartBook({ bookId, setRender, render,loader,setloader })
                   type="button"
                   className="btn btn-info"
                   onClick={() => setPlacing(!placing)}
-                  style={{ marginRight: "10px" }}
+                  style={{ width: "12vmax" }}
                 >
                   Order
                 </button>
               </Link>
               <button
                 type="button"
-                className="btn btn-warning"
+                className="btn btn-warning "
                 onClick={handleRemove}
+                style={{ width: "12vmax" }}
               >
                 Remove
               </button>

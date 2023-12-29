@@ -35,59 +35,56 @@ export default function Allbook() {
 
   return (
     <>
-     
       {
         <>
-        <div>
+          <div>
+            {loader && <Loader />}
 
-        {loader && <Loader  />}
-     
-          <div style={{ width: "90vw"
-          ,paddingBottom:"100px" }}>
-            <div
-              className={styles.boks}
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                background: "aliceblue",
-                columnGap: "62px",
-                rowGap: "40px",
-              }}
-            >
-              {book && book.length < 1 && (
-                <>
-                  <div>
+            <div style={{ paddingBottom: "100px" }}>
+              <div
+                className={styles.boks}
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  background: "aliceblue",
+                  columnGap: "62px",
+                  rowGap: "40px",
+                }}
+              >
+                {book && book.length < 1 && (
+                  <>
                     <div>
-                      <h3> No book present</h3>
+                      <div>
+                        <h3> No book present</h3>
+                      </div>
                     </div>
-                  </div>
-                </>
-              )}
-              {book &&
-                book.map((book, i) => (
-                  // <div className="card" style={{ width: "17.6rem" }}  key={i}>
-                  <div className={`card ${styles.card}`} key={i}>
-                    <img
-                      className="card-img-top"
-                      // src={`http://localhost:9000/books/${book.bookImage}`}
-                      src={`${HOST_ROOT}/books/${book.bookImage}`}
-                      alt="Cardcap"
-                    />
+                  </>
+                )}
+                {book &&
+                  book.map((book, i) => (
+                    // <div className="card" style={{ width: "17.6rem" }}  key={i}>
+                    <div className={`card ${styles.card}`} key={i}>
+                      <img
+                        className="card-img-top"
+                        // src={`http://localhost:9000/books/${book.bookImage}`}
+                        src={`${HOST_ROOT}/books/${book.bookImage}`}
+                        alt="Cardcap"
+                      />
 
-                    <div className="card-body">
-                      <h5 className="card-title">{book.name}</h5>
-                      <Link to={`/SingleBook/${book._id}`}>
-                        <button type="button" className="btn btn-dark">
-                          Detail
-                        </button>
-                      </Link>
+                      <div className="card-body">
+                        <h5 className="card-title">{book.name}</h5>
+                        <Link to={`/SingleBook/${book._id}`}>
+                          <button type="button" className="btn btn-dark">
+                            Detail
+                          </button>
+                        </Link>
+                      </div>
+                      {/* </div> */}
                     </div>
-                    {/* </div> */}
-                  </div>
-                ))}
+                  ))}
+              </div>
             </div>
           </div>
-      </div>
         </>
       }
     </>

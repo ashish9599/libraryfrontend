@@ -50,9 +50,9 @@ export default function Sidebar() {
         style={{
           // height: "100vh",
           position: "sticky",
-          width: "12%",
+          // width: "12%",
           // top: "21%",
-          padding:"20px"
+          padding: "20px",
         }}
       >
         <div

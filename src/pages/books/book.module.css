@@ -1,6 +1,5 @@
 .boks {
   padding: 8%;
- 
 }
 
 .fb {
@@ -12,10 +11,10 @@
 .mg {
   margin-top: 60px;
 }
-.card{
+.card {
   width: 17.6rem;
-  transition: all  0.4s ease-in-out;
-  height: 275px;
+  transition: all 0.4s ease-in-out;
+  /* height: 275px; */
 }
 /* .card::after{
   content: "";
@@ -26,19 +25,17 @@
   border-radius: 0.25rem;
   transition: all  1s ease-in-out;
 } */
-.card>img{
- 
-  transition: all  0.4s ease-in-out;
-
+.card > img {
+  transition: all 0.4s ease-in-out;
 }
-.card:hover{
-border-top-right-radius: 100px;
-border-bottom-right-radius: 100px;
+.card:hover {
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
   scale: 1.05;
   box-shadow: 0px 0px 10px 2px rgb(168, 183, 196);
 }
-.card:hover>img{
-border-top-right-radius: 100px;
+.card:hover > img {
+  border-top-right-radius: 100px;
 }
 /* .card:hover::after{
   background-color: rgb(220, 218, 218);
@@ -46,12 +43,14 @@ border-top-right-radius: 100px;
   width: 0rem;
   opacity: 0.4;
 } */
-
+.imgh {
+  width: 15%;
+}
 @media only screen and (max-width: 900px) {
-  .boks {
+  /* .boks {
     width: 48%;
-    transform: translate(72%, 50px);
-  }
+    transform: translate(50%, 50px);
+  } */
   .bokside button {
     margin-top: 15px;
   }
@@ -69,7 +68,7 @@ border-top-right-radius: 100px;
   }
   .bokside {
     font-size: 0.8rem;
-    height: 530px;
+    /* height: 530px; */
   }
   .bokside button {
     font-size: 0.7rem;

@@ -16,12 +16,12 @@ export default function MyCart() {
   useEffect(() => {
     try {
       const fetch = async () => {
-        setloader(true)
+        setloader(true);
         const res = await getUserCart();
         if (res.succuss) {
           setCart(res.cart);
         }
-        setloader(false)
+        setloader(false);
       };
       fetch();
     } catch (error) {
@@ -31,17 +31,17 @@ export default function MyCart() {
 
   const handleClear = async () => {
     try {
-      setProgress(10)
+      setProgress(10);
       const res = await deleteAll();
-      setProgress(50)
+      setProgress(50);
       if (res.succuss) {
-        setProgress(80)
+        setProgress(80);
         toast.success("All deleted");
         setRender(!render);
       } else {
         toast.error(res.message);
       }
-      setProgress(100)
+      setProgress(100);
     } catch (error) {
       console.error(error);
     }
@@ -49,45 +49,51 @@ export default function MyCart() {
 
   return (
     <>
-    {loader&&<Loader/> }
+      {loader && <Loader />}
       <div
         style={{
-          width: "100vw",
-         
-          padding: "56px 0px"
-          ,paddingBottom:"100px"
+          // width: "100vw",
+
+          padding: "56px 0px",
+          paddingBottom: "100px",
         }}
       >
-        {!loader&&<>
-          <div
-          className={styles.mrl}
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-                  <div>
-                        <Link to={`/`}>
-                          <span>
-                            <img
-                              style={{ width: "30px" }}
-                              src="https://iridescent-faloodeh-3725ab.netlify.app/assets/back.png"
-                              alt=""
-                            />
-                          </span>
-                        </Link>     
-                  </div>
-                <button type="button" className="btn btn-dark" onClick={handleClear}>
-                  Clear All
-                </button>
-        </div>
+        {!loader && (
+          <>
+            <div
+              className={styles.mrl}
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                minWidth: "40vmax",
+              }}
+            >
+              <div>
+                <Link to={`/`}>
+                  <span>
+                    <img
+                      style={{ width: "30px" }}
+                      src="https://iridescent-faloodeh-3725ab.netlify.app/assets/back.png"
+                      alt=""
+                    />
+                  </span>
+                </Link>
+              </div>
+              <button
+                type="button"
+                className="btn btn-dark"
+                onClick={handleClear}
+              >
+                Clear All
+              </button>
+            </div>
+          </>
+        )}
 
-        </>}
-        
         <div
           style={{
             display: "flex",
-            columnGap: "11.3%",
+            columnGap: "10.8%",
             rowGap: "50px",
             flexWrap: "wrap",
             width: "80%",

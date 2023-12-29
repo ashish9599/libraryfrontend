@@ -6,7 +6,7 @@ import Addimage from "../../images/icons8-add-image-48.png";
 import styles from "../../styles/login.module.css";
 
 const UpdateProfile = () => {
-  const { user ,setProgress} = useAuth();
+  const { user, setProgress } = useAuth();
   const [credential, setCredential] = useState({
     name: user.name,
     email: user.email,
@@ -24,25 +24,24 @@ const UpdateProfile = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setProgress(10)
+    setProgress(10);
     const { name, email } = credential;
     if (email === "" && name === "") {
       return toast.info("Please fill the form");
     }
     try {
-      setProgress(40)
-      
+      setProgress(40);
+
       const res = await UpdateUser(credential, userImage);
       if (res.succuss) {
         navigate(`/UserP`);
         toast.success(res.message);
-        setProgress(70)
+        setProgress(70);
         setCredential({ name: "", email: "" });
       } else {
         toast.error(res.message);
       }
-      setProgress(100)
-     
+      setProgress(100);
     } catch (error) {
       console.error(error);
     }
@@ -50,22 +49,19 @@ const UpdateProfile = () => {
 
   return (
     <>
-    <div
-    style={{
-      position: "absolute",
-      width: "100%",
-      zIndex: "10",
-      opacity: "0.55",
-    }}
-  >
-   
-  </div>
+      <div
+        style={{
+          width: "100%",
+          zIndex: "10",
+          opacity: "0.55",
+        }}
+      ></div>
       <div
         className="Login"
         style={{
-          height: "90vh",
-          minHeight: "90vh",
-          width: "100vw",
+          height: "600px",
+          // minHeight: "90vh",
+          // width: "100vw",
           background: "black",
         }}
       >
@@ -143,12 +139,8 @@ const UpdateProfile = () => {
               />
             </div>
 
-            <div className={styles.mU}>
-              <button
-                style={{ position: "absolute", right: "24%" }}
-                type="submit"
-                className="btn btn-primary"
-              >
+            <div className={styles.mU} style={{ textAlign: "center" }}>
+              <button type="submit" className="btn btn-primary">
                 Submit
               </button>
             </div>

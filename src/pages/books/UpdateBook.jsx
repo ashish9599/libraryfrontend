@@ -27,7 +27,7 @@ const UpdateBook = ({ bookId, books, setUpdate, update }) => {
     qty: books.qty,
   });
   const [bookImage, setBookImage] = useState(null);
- 
+
   const [available, setAvailable] = useState(books.available);
   const titleRef = useRef(null);
   const { setProgress } = useAuth();
@@ -42,7 +42,7 @@ const UpdateBook = ({ bookId, books, setUpdate, update }) => {
     e.preventDefault();
     try {
       let { name, desciption, price, author, category, language } = book;
-      
+
       if (
         name === "" &&
         desciption === "" &&
@@ -53,7 +53,7 @@ const UpdateBook = ({ bookId, books, setUpdate, update }) => {
       ) {
         return toast.info("Please fill the form");
       }
-  
+
       setProgress(10);
       const res = await updateBooks(bookId, book, available, bookImage);
       setProgress(60);
@@ -65,7 +65,6 @@ const UpdateBook = ({ bookId, books, setUpdate, update }) => {
         toast.error(res.message);
       }
       setProgress(100);
-   
     } catch (error) {
       console.error(error);
     }
@@ -73,7 +72,6 @@ const UpdateBook = ({ bookId, books, setUpdate, update }) => {
 
   return (
     <>
-      
       <div>
         {/* <div className="UpdateBook" style={{ width: "100vw" }}> */}
         {/* <div style={{ textAlign: "center" }}>
@@ -86,12 +84,13 @@ const UpdateBook = ({ bookId, books, setUpdate, update }) => {
             width: "70%",
             position: "absolute",
             zIndex: "10",
-            padding: "25px"
-            ,paddingBottom:"100px",
+            padding: "25px",
+            paddingBottom: "100px",
             borderRadius: "10px",
             transform: "translate(17%, 0px)",
             border: "1px solid rgb(219 236 250)",
             background: "#ecf5fd",
+            minWidth: "29vmax",
           }}
           onSubmit={handleSubmit}
           encType="multipart/form-data"

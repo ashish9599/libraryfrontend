@@ -7,6 +7,9 @@
 .p {
   width: 15%;
 }
+.pad{
+  padding-left: 25px;
+}
 .p ul {
   align-items: center;
   flex-direction: row;
@@ -20,6 +23,9 @@
   .p {
     width: 20%;
   }
+  .pad{
+    padding-left: 0px;
+  }
   .side {
     padding: 0px;
     font-size: 14px;
@@ -28,14 +34,14 @@
     font-size: 15px;
   }
   .p ul li {
-    margin: 2px !important;
+    margin: 2px 0 2px 2px !important;
   }
   .p img {
     width: 30px !important;
     height: 30px !important;
   }
   .search {
-    width: 50%;
+    width: 50vmax;
   }
   .search input {
     height: 28px;
@@ -60,9 +66,10 @@
   .sl {
     width: 30%;
   }
-
+  
   .search {
-    width: 50%;
+    /* width: 50%; */
+    width: 20vmax;
   }
   .search input {
     height: 25px;

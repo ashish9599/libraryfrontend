@@ -47,7 +47,7 @@ const OrderDetail = () => {
   const handleOrder = async () => {
     try {
       setProgress(10);
-     
+
       const res = await cancelOrder(orderId);
       setProgress(60);
 
@@ -58,8 +58,6 @@ const OrderDetail = () => {
         toast.error(res.message);
       }
       setProgress(100);
-
-     
     } catch (error) {
       console.error(error);
     }
@@ -67,16 +65,14 @@ const OrderDetail = () => {
 
   return (
     <>
-    
-        {loader && <Loader />}
-    
+      {loader && <Loader />}
+
       <div
         style={{
           width: "81%",
           left: " 10.2%",
           position: "absolute",
-          padding: "20px 0px"
-         
+          padding: "20px 0px",
         }}
       >
         <Link to={`/myOrder`}>
@@ -92,7 +88,7 @@ const OrderDetail = () => {
 
       {
         <>
-          <div style={{ width: "100vw" ,paddingBottom:"100px", }}>
+          <div style={{ paddingBottom: "100px" }}>
             <div
               style={{
                 display: "flex",
@@ -102,6 +98,7 @@ const OrderDetail = () => {
                 transform: "translate(12.5%, 70px)",
                 background: "aliceblue",
                 // height: "430px",
+                minWidth: " 38vmax",
               }}
             >
               {book && (
@@ -127,7 +124,7 @@ const OrderDetail = () => {
                       justifyContent: "space-between",
                     }}
                   >
-                    <div>
+                    <div style={{ padding: "30px" }}>
                       <div
                         style={{
                           background: "aliceblue",
@@ -151,7 +148,7 @@ const OrderDetail = () => {
                       style={{
                         justifyContent: "space-between",
 
-                        padding: "35px 0 0 10px",
+                        padding: "30px",
                       }}
                     >
                       <div>

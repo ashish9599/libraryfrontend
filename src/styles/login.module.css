@@ -1,16 +1,18 @@
 .loginform {
-  padding-left: 30px;
-  padding-top: 20px;
+  padding: 25px;
   color: #e9e5e58a;
 }
 .loginContainer {
   width: 50%;
-  height: 70%;
   background: #1515158c;
   transform: translate(50%, 22%);
   border-radius: 10px;
   border: 1px solid #282828;
 }
+.hf{
+  height: 600px;
+}
+
 .loginform .heading {
   text-align: center;
   margin-bottom: 30px;
@@ -25,7 +27,7 @@
 }
 .loginform .create {
   display: flex;
-  margin-top: 80px;
+
   padding: 20px 70px 0 0;
   justify-content: space-between;
 }
@@ -34,7 +36,7 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  position: absolute;
+  /* position: absolute; */
   left: 0%;
 }
 .mU {
@@ -43,6 +45,12 @@
 .mL {
   margin-top: 5px;
 }
+.loginform .create button {
+  height: 32px;
+  width: 70px;
+  font-size: 0.9rem;
+  padding: 0;
+}
 
 @media only screen and (max-width: 900px) {
   .loginform .file {
@@ -50,8 +58,11 @@
   }
   .loginContainer {
     width: 62%;
-    transform: translate(29%, 18%);
+    min-width: 29vmax;
+    transform: translate(27%, 18%);
+   
   }
+  
   .loginform .heading {
     font-size: 1.2rem;
   }
@@ -64,9 +75,7 @@
   .loginform label {
     position: relative;
   }
-  .mU {
-    margin-top: 30px;
-  }
+  
   .mU button {
     height: 32px;
     width: 70px;
@@ -74,9 +83,13 @@
     padding: 0;
   }
   .loginform .create {
-    margin-top: 80px;
+    display: contents;
     padding: 5px 10px 0 0;
   }
+  .create {
+    display: contents;
+  }
+  
   .loginform .create button {
     height: 32px;
     width: 70px;
@@ -91,4 +104,6 @@
   .mL {
     margin-top: 5px;
   }
+  
+  
 }

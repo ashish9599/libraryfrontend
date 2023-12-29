@@ -51,7 +51,7 @@ const Navbar = () => {
           className={`navbar-collapse ${style.gap}`}
           style={{ display: "flex", justifyContent: "space-between" }}
         >
-          <div style={{ width: "13.5%" }}>
+          <div className={style.pad} style={{ width: "8vmax" }}>
             <Link to={"/"} className={`navbar-brand ${style.fs}`}>
               Apka <br />
               BOOKStore
@@ -63,7 +63,7 @@ const Navbar = () => {
                 style={{
                   display: "flex",
                   gap: "10px",
-                  width: "90%",
+                  width: "100%",
                   alignItems: "center",
                 }}
               >
@@ -102,16 +102,16 @@ const Navbar = () => {
                   {name.length > 1 &&
                     allbook.map((book, i) => (
                       <>
-                        <Link 
+                        <Link
                           to={`/SingleBook/${book._id}`}
                           onClick={() => setName("")}
                           key={i}
-                          style={{color:"black"}}
+                          style={{ color: "black" }}
                         >
                           <li
                             style={{
                               borderBottom: "1px solid rgb(25 25 25 / 12%)",
-                              height:"35px"
+                              height: "35px",
                             }}
                           >
                             {book.name}
@@ -132,6 +132,7 @@ const Navbar = () => {
                     alignItems: "center",
                     flexDirection: "row",
                     justifyContent: "end",
+                    gap: "7px",
                   }}
                 >
                   <li className="nav-item active m-2">
@@ -158,11 +159,12 @@ const Navbar = () => {
               </div>
             ) : (
               <ul
-                className="navbar-nav   mt-2 mt-lg-0"
+                className="navbar-nav   mt-2 "
                 style={{
                   alignItems: "center",
                   flexDirection: "row",
                   justifyContent: "end",
+                  gap: "7px",
                 }}
               >
                 <li className="nav-item active m-2">
@@ -187,6 +189,7 @@ const Navbar = () => {
                 padding: "20px 20px 0px 0px",
                 gap: "10px",
                 marginBottom: "10px",
+                minWidth: "47vmax",
               }}
             >
               {display && (

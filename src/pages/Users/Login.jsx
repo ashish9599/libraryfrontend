@@ -9,9 +9,9 @@ const Login = () => {
     email: "",
     password: "",
   });
- 
+
   const navigate = useNavigate();
-  const { user, loginUser,setProgress } = useAuth();
+  const { user, loginUser, setProgress } = useAuth();
   const titleRef = useRef(null);
   useEffect(() => {
     titleRef.current.focus();
@@ -26,25 +26,25 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setProgress(10)
+    setProgress(10);
     const { email, password } = credential;
     if (email === "" && password === "") {
       return toast.info("Please fill the form");
     }
     try {
-      setProgress(40)
-     
+      setProgress(40);
+
       const res = await loginUser(credential);
       console.log("login", res);
       if (res.succuss) {
-        setProgress(70)
+        setProgress(70);
         navigate(`/`);
         toast.success(res.message);
       } else {
         toast.error(res.message);
       }
-      setProgress(100)
-   
+      setProgress(100);
+
       setCredential({ email: "", password: "" });
     } catch (error) {
       console.log(error);
@@ -60,13 +60,8 @@ const Login = () => {
           zIndex: "10",
           opacity: "0.55",
         }}
-      >
-       
-      </div>
-      <div
-        className="Login"
-        style={{ height: "90vh", width: "100vw", background: "black" }}
-      >
+      ></div>
+      <div className="Login" style={{ height: "90vh", background: "black" }}>
         <div className={styles.loginContainer}>
           <form onSubmit={handleSubmit} className={styles.loginform}>
             <div className={styles.heading}>

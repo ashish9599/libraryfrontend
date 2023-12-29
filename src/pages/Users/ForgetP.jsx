@@ -21,19 +21,18 @@ const Forget = () => {
     setCredential({ ...credential, [e.target.name]: e.target.value });
   };
   const handleSubmit = async (e) => {
-
     e.preventDefault();
-    setProgress(10)
-   
+    setProgress(10);
+
     const { email, password } = credential;
     if (email === "" && password === "") {
       return toast.info("Please fill the form");
     }
     try {
-      setProgress(20)
-   
+      setProgress(20);
+
       const res = await changePassword(credential);
-      setProgress(60)
+      setProgress(60);
       console.log(res);
       if (res.succuss) {
         navigate(`/login`);
@@ -43,12 +42,11 @@ const Forget = () => {
           confirmPassword: "",
         });
         toast.success(res.message);
-        setProgress(90)
+        setProgress(90);
       } else {
         toast(res.message);
       }
-      setProgress(100)
-  
+      setProgress(100);
     } catch (error) {
       console.error(error);
     }
@@ -56,22 +54,20 @@ const Forget = () => {
 
   return (
     <>
-    <div
+      <div
         style={{
           position: "absolute",
           width: "100%",
           zIndex: "10",
           opacity: "0.55",
         }}
-      >
-     
-      </div>
+      ></div>
       <div
         className="Login"
         style={{
-          height: "90vh",
-          minHeight: "90vh",
-          width: "100vw",
+          height: "600px",
+
+          // width: "100vw",
           background: "black",
         }}
       >
@@ -115,11 +111,11 @@ const Forget = () => {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="exampleInputPassword1">New Password</label>
+              <label htmlFor="exampleInputPassword12">New Password</label>
               <input
                 type="password"
                 className="form-control"
-                id="exampleInputPassword1"
+                id="exampleInputPassword12"
                 placeholder="Password"
                 name="newPassword"
                 value={credential.newPassword}
@@ -139,12 +135,8 @@ const Forget = () => {
               />
             </div>
 
-            <div style={{ marginTop: "45px" }}>
-              <button
-                style={{ position: "absolute", right: "24%" }}
-                type="submit"
-                className="btn btn-primary"
-              >
+            <div style={{ textAlign: "center", padding: "20px" }}>
+              <button type="submit" className="btn btn-primary">
                 Submit
               </button>
             </div>
